@@ -1,3 +1,4 @@
+/* TAG SELECTORS /////////////////////////////////////////////////////////////////////////////////////////////////////*/
 html, body {
     height: 100%;
 }
@@ -6,14 +7,12 @@ body {
     margin: 0;
 }
 
-
 table {
-    table-layout: fixed ;
-    width: 600px ;
+    table-layout: fixed;
 }
 
 td {
-    width: 50% ;
+    width: 50%;
 }
 
 th:first-child, td:first-child {
@@ -24,11 +23,11 @@ th:last-child, td:last-child {
     text-align: right;
 }
 
+/* CLASS SELECTORS ///////////////////////////////////////////////////////////////////////////////////////////////////*/
 .container-flex {
     display: flex;
     height: 100%;
     flex-direction: column;
-    text-align: center;
 }
 
 .wrapper-flex {
@@ -38,6 +37,14 @@ th:last-child, td:last-child {
     flex-direction: column;
 }
 
+.planet {
+    width: 150px;
+    height: 150px;
+    margin: 30px;
+    background: black;
+}
+
+/* ID SELECTORS //////////////////////////////////////////////////////////////////////////////////////////////////////*/
 #titleBar {
     height: 150px;
     background: aqua;
@@ -50,4 +57,56 @@ th:last-child, td:last-child {
 #newGameButton {
     height: 50px;
     width: 150px;
+}
+
+#highscoreTable {
+    width: 600px;
+}
+
+#gameStateBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 75px;
+    background: blueviolet;
+}
+
+#nickname, #timeleft, #money {
+    width: 33%;
+    margin: 20px;
+}
+
+#nickname {
+    text-align: start;
+}
+
+#timeleft {
+    text-align: center;
+}
+
+#money {
+    text-align: end;
+}
+
+#gameWindow {
+    display: flex;
+    height: calc(100% - 75px);
+}
+
+#shipWindow {
+    width: 33%;
+    overflow: auto;
+    background: darkgrey;
+}
+
+#shipTable {
+    width: 100%;
+}
+
+#planetWindow {
+    width: 67%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    overflow: auto;
 }
