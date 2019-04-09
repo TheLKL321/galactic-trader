@@ -202,13 +202,25 @@ th:last-child, td:last-child {
     margin-top: 75px;
 }
 
+#shipPopup {
+    width: 80%;
+    height: 500px;
+    flex-direction: column;
+}
+
 #shipPopupTitleBar {
     justify-content: space-between;
     flex-direction: row;
 }
 
-#shipDockedPopup {
-    width: 80%;
-    height: 500px;
-    flex-direction: column;
+#shipPopupGoodsWindow {
+    height: calc(100% - 75px);
+}
+
+#shipPopupControlWindow {
+    background: khaki;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
