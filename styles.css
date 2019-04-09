@@ -44,6 +44,26 @@ th:last-child, td:last-child {
     background: black;
 }
 
+.popup {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.screen-blocker {
+    background: black;
+    opacity: 0.6;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 99;
+}
 /* ID SELECTORS //////////////////////////////////////////////////////////////////////////////////////////////////////*/
 #titleBar {
     height: 150px;
@@ -61,6 +81,17 @@ th:last-child, td:last-child {
 
 #highscoreTable {
     width: 600px;
+}
+
+#newGamePopup {
+    background: white;
+    width: 350px;
+    height: 100px;
+    z-index: 101;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #gameStateBar {
