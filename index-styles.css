@@ -1,0 +1,37 @@
+/* Main page */
+#titleBar {
+    height: 150px;
+    background: aqua;
+}
+
+#newGameBar {
+    height: 100px;
+}
+
+#newGameButton {
+    height: 50px;
+    width: 150px;
+}
+
+#highscoreTable {
+    width: 600px;
+    table-layout: fixed;
+}
+
+/* New game popup*/
+.new-game-popup.popup {
+    width: 350px;
+    height: 100px;
+    align-items: center;
+    flex-direction: column;
+}
+
+#newGamePopupExitButton {
+    align-self: flex-end;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+#newGamePopupInput {
+    margin: auto;
+}

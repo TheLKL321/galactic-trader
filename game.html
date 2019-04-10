@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="game-styles.css">
     <title>Galactic Trader</title>
 </head>
 <body>
     <div class="container-flex">
         <div id="gameStateBar">
-            <h3 id="nickname">&lt;Nickname&gt;</h3>
-            <h3 id="timeleft">13:37</h3>
-            <h3 id="money">30035$</h3>
+            <h3 class="text-left">&lt;Nickname&gt;</h3>
+            <h3 class="text-middle">13:37</h3>
+            <h3 class="text-right">30035$</h3>
         </div>
         <div id="gameWindow">
             <div class="scrollable" id="shipWindow">
@@ -100,38 +101,38 @@
                 </table>
             </div>
             <div class="scrollable" id="planetWindow">
-                <a href="#planetPop"><div class="planet"></div></a>
-                <a href="#planetPop"><div class="planet"></div></a>
-                <a href="#planetPop"><div class="planet"></div></a>
-                <a href="#planetPop"><div class="planet"></div></a>
-                <a href="#planetPop"><div class="planet"></div></a>
-                <a href="#planetPop"><div class="planet"></div></a>
-                <a href="#planetPop"><div class="planet"></div></a>
-                <a href="#planetPop"><div class="planet"></div></a>
-                <a href="#planetPop"><div class="planet"></div></a>
-                <a href="#planetPop"><div class="planet"></div></a>
-                <a href="#planetPop"><div class="planet"></div></a>
-                <a href="#planetPop"><div class="planet"></div></a>
-                <a href="#planetPop"><div class="planet"></div></a>
-                <a href="#planetPop"><div class="planet"></div></a>
-                <a href="#planetPop"><div class="planet"></div></a>
-                <a href="#planetPop"><div class="planet"></div></a>
-                <a href="#planetPop"><div class="planet"></div></a>
-                <a href="#planetPop"><div class="planet"></div></a>
-                <a href="#planetPop"><div class="planet"></div></a>
-                <a href="#planetPop"><div class="planet"></div></a>
+                <a href="#planetPopup"><div class="planet"></div></a>
+                <a href="#planetPopup"><div class="planet"></div></a>
+                <a href="#planetPopup"><div class="planet"></div></a>
+                <a href="#planetPopup"><div class="planet"></div></a>
+                <a href="#planetPopup"><div class="planet"></div></a>
+                <a href="#planetPopup"><div class="planet"></div></a>
+                <a href="#planetPopup"><div class="planet"></div></a>
+                <a href="#planetPopup"><div class="planet"></div></a>
+                <a href="#planetPopup"><div class="planet"></div></a>
+                <a href="#planetPopup"><div class="planet"></div></a>
+                <a href="#planetPopup"><div class="planet"></div></a>
+                <a href="#planetPopup"><div class="planet"></div></a>
+                <a href="#planetPopup"><div class="planet"></div></a>
+                <a href="#planetPopup"><div class="planet"></div></a>
+                <a href="#planetPopup"><div class="planet"></div></a>
+                <a href="#planetPopup"><div class="planet"></div></a>
+                <a href="#planetPopup"><div class="planet"></div></a>
+                <a href="#planetPopup"><div class="planet"></div></a>
+                <a href="#planetPopup"><div class="planet"></div></a>
+                <a href="#planetPopup"><div class="planet"></div></a>
             </div>
         </div>
     </div>
 
-    <div class="popup-wrapper" id="planetPop">
-        <div class="popup" id="planetPopup">
+    <div class="popup-wrapper" id="planetPopup">
+        <div class="popup planet-popup">
             <div class="wrapper-flex popup-title-bar">
-                <h3 id="planetPopupTitle">&lt;Planet name&gt;</h3>
-                <a href="#" id="planetPopupExitButton">X</a>
+                <h3 class="popup-title planet-popup">&lt;Planet name&gt;</h3>
+                <a href="#" class="exit-button planet-popup">X</a>
             </div>
             <div class="wrapper-flex popup-content-window">
-                <div class="scrollable" id="planetPopupGoodsWindow">
+                <div class="scrollable goods-window planet-popup">
                     <table class="table-wrapped">
                         <thead>
                         <tr>
@@ -242,7 +243,7 @@
                         </tr>
                     </table>
                 </div>
-                <div class="scrollable" id="planetPopupShipWindow">
+                <div class="scrollable ship-window planet-popup">
                     <table class="table-wrapped">
                         <thead>
                         <tr><th>Docked ships</th></tr>
@@ -277,7 +278,7 @@
         <div class="popup ship-popup">
             <div class="wrapper-flex popup-title-bar ship-popup">
                 <a href="#" class="exit-button ship-popup">X</a>
-                <div class="popup-title-bar-title ship-popup">
+                <div class="popup-title ship-popup">
                     <h3 class="text-left">&lt;Ship name&gt;</h3>
                     <h3 class="text-middle">DOCKED</h3>
                     <h3 class="text-right">&lt;Planet name&gt;</h3>
@@ -431,7 +432,7 @@
         <div class="popup ship-popup">
             <div class="wrapper-flex popup-title-bar ship-popup">
                 <a href="#" class="exit-button ship-popup">X</a>
-                <div class="popup-title-bar-title ship-popup">
+                <div class="popup-title ship-popup">
                     <h3 class="text-left">&lt;Ship name&gt;</h3>
                     <h3 class="text-middle">EN ROUTE</h3>
                     <h3 class="text-right">&lt;Planet name&gt;</h3>
