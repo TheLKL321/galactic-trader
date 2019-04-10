@@ -1,3 +1,12 @@
+:root {
+    --primary: #242126;
+    --primary-light: #302C33;
+    --primary-lighter: #6B6473;
+    --secondary: #333120;
+    --accent: #8C4286;
+    --text: #FFFFFF
+}
+
 /* TAG SELECTORS /////////////////////////////////////////////////////////////////////////////////////////////////////*/
 html, body {
     height: 100%;

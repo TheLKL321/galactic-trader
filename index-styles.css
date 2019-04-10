@@ -1,21 +1,79 @@
 /* Main page */
+body {
+    background: var(--primary-light);
+}
+
 #titleBar {
     height: 150px;
-    background: aqua;
+    background: var(--primary);
+}
+
+#titleBar > h1 {
+    font-family: "Lucida Sans Unicode", sans-serif;
+    color: var(--text);
+    font-size: 5.5em;
 }
 
 #newGameBar {
-    height: 100px;
+    height: 150px;
 }
 
 #newGameButton {
     height: 50px;
     width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    font-family: "Trebuchet MS", sans-serif;
+    color: var(--text);
+    font-size: 1.8em;
+    background: var(--primary);
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+
+    box-shadow:
+            1px 1px var(--primary-lighter),
+            2px 2px var(--primary-lighter),
+            3px 3px var(--primary-lighter);
+
+    transition: all 0.1s ease-in;
+}
+
+#newGameButton:hover {
+    background: var(--accent);
+    text-decoration: none;
+}
+
+#newGameButton:active {
+    box-shadow: none;
+    margin-top: 8px;
+    margin-left: 8px;
+}
+
+.wrapper-flex > h2 {
+    color: var(--text);
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 1.8em;
+
 }
 
 #highscoreTable {
     width: 600px;
     table-layout: fixed;
+}
+
+#highscoreTable td,th {
+    color: var(--text);
+    font-family: "Trebuchet MS", sans-serif;
+}
+
+#highscoreTable th {
+    font-size: 1.5em;
+    border-top: 2px solid var(--text);
+    border-collapse: collapse;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 /* New game popup*/
