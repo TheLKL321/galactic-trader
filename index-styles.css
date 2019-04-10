@@ -18,34 +18,19 @@ body {
     height: 150px;
 }
 
-#newGameButton {
+#newGameButton.btn {
     height: 50px;
     width: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     border-radius: 5px;
-    font-family: "Trebuchet MS", sans-serif;
-    color: var(--text);
     font-size: 1.8em;
-    background: var(--primary);
-    padding: 10px 20px 10px 20px;
-    text-decoration: none;
 
     box-shadow:
             1px 1px var(--primary-lighter),
             2px 2px var(--primary-lighter),
             3px 3px var(--primary-lighter);
-
-    transition: all 0.1s ease-in;
 }
 
-#newGameButton:hover {
-    background: var(--accent);
-    text-decoration: none;
-}
-
-#newGameButton:active {
+#newGameButton.btn:active {
     box-shadow: none;
     margin-top: 8px;
     margin-left: 8px;
@@ -55,7 +40,6 @@ body {
     color: var(--text);
     font-family: "Trebuchet MS", sans-serif;
     font-size: 1.8em;
-
 }
 
 #highscoreTable {
@@ -78,18 +62,40 @@ body {
 
 /* New game popup*/
 .new-game-popup.popup {
-    width: 350px;
+    width: 375px;
     height: 100px;
     align-items: center;
     flex-direction: column;
 }
 
-#newGamePopupExitButton {
+.new-game-popup.exit-button {
     align-self: flex-end;
     margin-top: 10px;
     margin-right: 10px;
 }
 
 #newGamePopupInput {
-    margin: auto;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+
+#newGamePopupInput > label {
+    color: var(--text);
+}
+
+#newGamePopupButtonWrapper {
+    width: 60px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.new-game-popup.btn {
+    width: 50px;
+    height: 20px;
 }

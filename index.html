@@ -12,7 +12,7 @@
             <h1>GALACTIC TRADER</h1>
         </div>
         <div class="wrapper-flex" id="newGameBar">
-            <a href="#newGamePopup" id="newGameButton">New game</a>
+            <a href="#newGamePopup" class="btn" id="newGameButton">New game</a>
         </div>
         <div class="wrapper-flex">
             <h2>HIGHSCORES</h2>
@@ -40,14 +40,14 @@
     </div>
     <div class="popup-wrapper" id="newGamePopup">
         <div class="popup new-game-popup">
-            <div id="newGamePopupExitButton">
-                <a href="#">X</a>
-            </div>
+            <a href="#" class="exit-button new-game-popup">X</a>
             <div id="newGamePopupInput">
                 <label>Nickname:
                     <input>
                 </label>
-                <button>Begin</button>
+                <div id="newGamePopupButtonWrapper">
+                    <a href="game.html" class="btn new-game-popup">Begin</a>
+                </div>
             </div>
         </div>
     </div>
