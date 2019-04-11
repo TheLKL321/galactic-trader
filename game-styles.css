@@ -4,10 +4,6 @@ th, td {
     padding: 5px;
 }
 
-th {
-    font-size: 1.5em;
-}
-
 tbody > tr:first-child > td {
     border-top: 1px solid var(--text);
     border-collapse: collapse;
@@ -77,12 +73,15 @@ a {
     padding: 15px;
 }
 
+#shipWindow th {
+    font-size: 1.5em;
+}
+
 #planetWindow {
     width: 67%;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
-    padding: 15px;
     background: black;
 }
 
@@ -110,13 +109,18 @@ a {
 
 /* Popup */
 .popup-title-bar {
-    background: coral;
-    height: 75px;
+    height: 100px;
     flex-direction: row;
+    background: var(--primary);
+}
+
+.popup-title-bar h3 {
+    color: var(--text);
+    font-size: 1.2em;
 }
 
 .popup-content-window {
-    height: calc(100% - 75px);
+    height: calc(100% - 100px);
     flex-direction: row;
 }
 
@@ -173,12 +177,12 @@ a {
 
 .ship-popup.exit-button {
     align-self: flex-end;
-    padding-top: 5px;
-    padding-right: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
 }
 
 .ship-popup.popup-title {
-    width: 100%;
+    width: calc(100% - 30px);
     height: 100%;
     display: flex;
     align-items: center;
@@ -187,12 +191,30 @@ a {
 
 .ship-popup.goods-window {
     height: calc(100% - 75px);
+    padding: 15px;
 }
 
 .ship-popup.popup-control-window {
-    background: khaki;
     height: 75px;
     display: flex;
     align-items: center;
     justify-content: space-around;
+    background: var(--primary);
+}
+
+.ship-popup.popup-control-window h3,label {
+    color: var(--text);
+}
+
+.ship-popup.button-wrapper {
+    width: 70px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ship-popup.btn {
+    width: 60px;
+    height: 30px;
 }
