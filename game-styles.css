@@ -121,7 +121,6 @@ a {
 }
 
 .popup-content-window {
-    height: calc(100% - 100px);
     flex-direction: row;
 }
 
@@ -201,8 +200,12 @@ a {
     justify-content: space-between;
 }
 
+.ship-popup.popup-content-window {
+    height: calc(100% - 100px);
+}
+
 .ship-popup.goods-window {
-    height: calc(100% - 75px);
+    height: calc(100% - 105px);
     padding: 15px;
 }
 
@@ -230,4 +233,92 @@ a {
 .ship-popup.btn {
     width: 60px;
     height: 30px;
+}
+
+@media screen
+and (min-device-width: 320px)
+and (max-device-width: 1024px)
+and (min-device-height: 568px)
+and (max-device-height: 1370px){
+    #gameStateBar {
+        height: 150px;
+    }
+
+    #gameStateBar > h3 {
+        font-size: 3em;
+        margin: 25px;
+    }
+
+    #gameWindow {
+        height: calc(100% - 150px);
+        font-size: 2em;
+    }
+
+    #shipWindow {
+        width: 50%;
+    }
+
+    #shipWindow td {
+        padding-top: 13px;
+        padding-bottom: 13px;
+    }
+
+    #planetWindow {
+        width: 50%;
+    }
+
+    .planet-popup.popup {
+        height: 1000px;
+        font-size: 2em;
+    }
+
+    .ship-popup.popup-wrapper {
+        width: 50%;
+        height: calc(100% - 150px);
+        margin-top: 150px;
+    }
+
+    .ship-popup.popup {
+        width: 90%;
+        height: 1000px;
+        font-size: 1.5em;
+    }
+
+    .ship-popup.popup-title-bar {
+        height: 200px;
+    }
+
+    .ship-popup.popup-title {
+        height: calc(100% - 75px);
+        justify-content: space-around;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+
+    .ship-popup.popup-content-window {
+        height: calc(100% - 200px);
+    }
+
+    .ship-popup.goods-window {
+        height: calc(100% - 155px);
+    }
+
+    .ship-popup.popup-control-window {
+        height: 125px;
+    }
+
+    .ship-popup.popup-control-window > label {
+        width: 45%;
+    }
+
+    .ship-popup.button-wrapper {
+        width: 90px;
+        height: 90px;
+    }
+
+    .ship-popup.btn {
+        width: 80px;
+        height: 80px;
+        font-size: 0.8em;
+    }
 }
