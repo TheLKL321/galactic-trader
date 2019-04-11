@@ -124,6 +124,10 @@ a {
     flex-direction: row;
 }
 
+.goods-window {
+    background: var(--secondary-lighter);
+}
+
 /* Planet popup */
 .planet-popup.popup {
     width: 800px;
@@ -137,13 +141,20 @@ a {
     text-align: center;
 }
 
-.planet-popup.exit-button {
+.planet-popup.popup-title {
+    font-size: 1.5em;
+}
+
+#planetPopupExitButtonWrapper {
     width: 75px;
-    text-align: center;
+}
+
+.planet-popup.exit-button {
+    width: 40px;
+    height: 40px;
 }
 
 .planet-popup.goods-window {
-    background: darkseagreen;
     width: 50%;
     height: 100%;
 }
