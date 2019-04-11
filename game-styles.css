@@ -106,6 +106,7 @@ tbody > tr:first-child > td {
 }
 
 .popup-content-window {
+    height: calc(100% - 100px);
     flex-direction: row;
 }
 
@@ -161,7 +162,7 @@ tbody > tr:first-child > td {
 }
 
 .ship-popup.popup {
-    width: 80%;
+    width: 90%;
     height: 500px;
     flex-direction: column;
 }
@@ -264,7 +265,6 @@ and (max-device-height: 1370px){
     }
 
     .ship-popup.popup {
-        width: 90%;
         height: 1000px;
         font-size: 1.5em;
     }

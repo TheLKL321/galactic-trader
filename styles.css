@@ -16,6 +16,7 @@ html, body {
 body {
     margin: 0;
     font-family: "Trebuchet MS", sans-serif;
+    font-weight: normal;
 }
 
 input {
