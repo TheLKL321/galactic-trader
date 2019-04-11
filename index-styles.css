@@ -10,7 +10,6 @@ body {
 
 #titleBar > h1 {
     font-family: "Lucida Sans Unicode", sans-serif;
-    color: var(--text);
     font-size: 5.5em;
 }
 
@@ -19,8 +18,8 @@ body {
 }
 
 #newGameButton.btn {
-    height: 50px;
     width: 150px;
+    height: 50px;
     border-radius: 5px;
     font-size: 1.8em;
 
@@ -37,19 +36,12 @@ body {
 }
 
 .wrapper-flex > h2 {
-    color: var(--text);
-    font-family: "Trebuchet MS", sans-serif;
     font-size: 1.8em;
 }
 
 #highscoreTable {
     width: 600px;
     table-layout: fixed;
-}
-
-#highscoreTable td,th {
-    color: var(--text);
-    font-family: "Trebuchet MS", sans-serif;
 }
 
 #highscoreTable th {
@@ -60,7 +52,7 @@ body {
     padding-bottom: 10px;
 }
 
-/* New game popup*/
+/* New game popup */
 .new-game-popup.popup {
     width: 375px;
     height: 100px;
@@ -83,10 +75,6 @@ body {
     flex-direction: row;
 }
 
-#newGamePopupInput > label {
-    color: var(--text);
-}
-
 #newGamePopupButtonWrapper {
     width: 60px;
     height: 30px;
@@ -100,12 +88,13 @@ body {
     height: 20px;
 }
 
-
+/* MOBILE STYLE //////////////////////////////////////////////////////////////////////////////////////////////////////*/
 @media screen
 and (min-device-width: 320px)
 and (max-device-width: 1024px)
 and (min-device-height: 568px)
 and (max-device-height: 1370px){
+    /* Main page */
     #newGameBar {
         height: 450px;
     }
@@ -129,11 +118,10 @@ and (max-device-height: 1370px){
     }
 
     .wrapper-flex > h2 {
-        color: var(--text);
-        font-family: "Trebuchet MS", sans-serif;
         font-size: 2.5em;
     }
 
+    /* New game popup */
     .new-game-popup.popup {
         width: 800px;
         height: 300px;

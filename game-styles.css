@@ -1,20 +1,11 @@
 /* General style */
 th, td {
-    color: var(--text);
     padding: 5px;
 }
 
 tbody > tr:first-child > td {
     border-top: 1px solid var(--text);
     border-collapse: collapse;
-}
-
-a {
-    text-decoration: none;
-    color: var(--text);
-}
-
-.container-flex {
 }
 
 .table-wrapped {
@@ -53,8 +44,6 @@ a {
 #gameStateBar > h3 {
     width: 33%;
     margin: 20px;
-    color: var(--text);
-    font-family: "Trebuchet MS", sans-serif;
     font-size: 2em;
 }
 
@@ -65,7 +54,6 @@ a {
 
 #shipWindow {
     width: 33%;
-    font-family: "Trebuchet MS", sans-serif;
     background: var(--primary-light);
 }
 
@@ -96,8 +84,6 @@ a {
 }
 
 .planet > h3 {
-    color: var(--text);
-    font-family: "Trebuchet MS", sans-serif;
     margin-bottom: 0;
 }
 
@@ -116,7 +102,6 @@ a {
 }
 
 .popup-title-bar h3 {
-    color: var(--text);
     font-size: 1.2em;
 }
 
@@ -218,10 +203,6 @@ a {
     background: var(--primary);
 }
 
-.ship-popup.popup-control-window h3,label {
-    color: var(--text);
-}
-
 .ship-popup.button-wrapper {
     width: 70px;
     height: 40px;
@@ -235,11 +216,13 @@ a {
     height: 30px;
 }
 
+/* MOBILE STYLE //////////////////////////////////////////////////////////////////////////////////////////////////////*/
 @media screen
 and (min-device-width: 320px)
 and (max-device-width: 1024px)
 and (min-device-height: 568px)
 and (max-device-height: 1370px){
+    /* Game screen */
     #gameStateBar {
         height: 150px;
     }
@@ -263,6 +246,7 @@ and (max-device-height: 1370px){
         padding-bottom: 13px;
     }
 
+    /* Planet popup */
     #planetWindow {
         width: 50%;
     }
@@ -272,6 +256,7 @@ and (max-device-height: 1370px){
         font-size: 2em;
     }
 
+    /* Ship popup */
     .ship-popup.popup-wrapper {
         width: 50%;
         height: calc(100% - 150px);

@@ -15,6 +15,7 @@ html, body {
 
 body {
     margin: 0;
+    font-family: "Trebuchet MS", sans-serif;
 }
 
 input {
@@ -31,6 +32,10 @@ table {
     table-layout: auto;
 }
 
+h1, h2, h3, td, th, label, a {
+    color: var(--text);
+}
+
 td {
     text-align: center;
 }
@@ -41,6 +46,10 @@ th:first-child, td:first-child {
 
 th:last-child, td:last-child {
     text-align: right;
+}
+
+a {
+    text-decoration: none;
 }
 
 /* CLASS SELECTORS ///////////////////////////////////////////////////////////////////////////////////////////////////*/
@@ -76,7 +85,6 @@ th:last-child, td:last-child {
 .popup {
     display: flex;
     border-radius: 5px;
-    font-family: "Trebuchet MS", sans-serif;
     background: var(--primary-light);
 }
 
@@ -88,7 +96,6 @@ th:last-child, td:last-child {
     justify-content: center;
     border-radius: 4px;
     background: var(--primary-lighter);
-    text-decoration: none;
     color: var(--text);
 }
 
@@ -98,10 +105,8 @@ th:last-child, td:last-child {
     justify-content: center;
     border-width: 0;
     border-radius: 3px;
-    font-family: "Trebuchet MS", sans-serif;
     color: var(--text);
     background: var(--primary);
-    text-decoration: none;
 
     box-shadow:
             0 0 var(--primary-lighter),
@@ -113,7 +118,6 @@ th:last-child, td:last-child {
 
 .btn:hover {
     background: var(--accent);
-    text-decoration: none;
 }
 
 .btn:active {
@@ -122,6 +126,7 @@ th:last-child, td:last-child {
     margin-left: 4px;
 }
 
+/* MOBILE STYLE //////////////////////////////////////////////////////////////////////////////////////////////////////*/
 @media screen
 and (min-device-width: 320px)
 and (max-device-width: 1024px)
