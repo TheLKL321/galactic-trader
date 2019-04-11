@@ -1,4 +1,26 @@
 /* General style */
+th, td {
+    color: var(--text);
+    padding: 5px;
+}
+
+th {
+    font-size: 1.5em;
+}
+
+tbody > tr:first-child > td {
+    border-top: 1px solid var(--text);
+    border-collapse: collapse;
+}
+
+a {
+    text-decoration: none;
+    color: var(--text);
+}
+
+.container-flex {
+}
+
 .table-wrapped {
     width: 100%;
 }
@@ -29,12 +51,15 @@
     align-items: center;
     justify-content: space-between;
     height: 75px;
-    background: blueviolet;
+    background: var(--primary);
 }
 
 #gameStateBar > h3 {
     width: 33%;
     margin: 20px;
+    color: var(--text);
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 2em;
 }
 
 #gameWindow {
@@ -44,7 +69,12 @@
 
 #shipWindow {
     width: 33%;
-    background: darkgrey;
+    font-family: "Trebuchet MS", sans-serif;
+    background: var(--primary-light);
+}
+
+#shipWindow > table {
+    padding: 15px;
 }
 
 #planetWindow {
@@ -52,14 +82,30 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
+    padding: 15px;
+    background: black;
 }
 
 .planet {
-    display: block;
     width: 150px;
     height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     margin: 30px;
-    background: black;
+}
+
+.planet > h3 {
+    color: var(--text);
+    font-family: "Trebuchet MS", sans-serif;
+    margin-bottom: 0;
+}
+
+.planet-link {
+    width: 100px;
+    height: 100px;
+    background: white;
 }
 
 /* Popup */
