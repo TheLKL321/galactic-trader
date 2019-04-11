@@ -111,6 +111,7 @@ a {
 .popup-title-bar {
     height: 100px;
     flex-direction: row;
+    border-radius: inherit;
     background: var(--primary);
 }
 
@@ -210,6 +211,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-around;
+    border-radius: inherit;
     background: var(--primary);
 }
 

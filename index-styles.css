@@ -99,3 +99,69 @@ body {
     width: 50px;
     height: 20px;
 }
+
+
+@media screen
+and (min-device-width: 320px)
+and (max-device-width: 1024px)
+and (min-device-height: 568px)
+and (max-device-height: 1370px){
+    #newGameBar {
+        height: 450px;
+    }
+
+    #newGameButton.btn {
+        width: 600px;
+        height: 200px;
+        font-size: 4em;
+    }
+
+    #highscoreTable {
+        width: 800px;
+    }
+
+    #highscoreTable td,th {
+        font-size: 1.5em;
+    }
+
+    #highscoreTable th {
+        font-size: 2em;
+    }
+
+    .wrapper-flex > h2 {
+        color: var(--text);
+        font-family: "Trebuchet MS", sans-serif;
+        font-size: 2.5em;
+    }
+
+    .new-game-popup.popup {
+        width: 800px;
+        height: 300px;
+    }
+
+    #newGamePopupInput {
+        height: calc(100% - 70px);
+        width: 90%;
+    }
+
+    #newGamePopup label {
+        margin-left: 20px;
+        font-size: 2em;
+    }
+
+    #newGamePopupInput input {
+        height: 50px;
+        font-size: 1.2em;
+    }
+
+    #newGamePopupButtonWrapper {
+        width: 160px;
+        height: 70px;
+    }
+
+    .new-game-popup.btn {
+        width: 150px;
+        height: 60px;
+        font-size: 2em;
+    }
+}
