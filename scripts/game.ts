@@ -736,18 +736,18 @@ let initialData = JSON.parse("{\n" +
 
 interface Iitem {
     [name: string]: {
-        available: number;
-        buy_price: number;
-        sell_price: number;
+        available: number
+        buy_price: number
+        sell_price: number
     }
 }
 
 interface Iplanet {
     [name: string]: {
-        available_items: Iitem;
-        x: number;
-        y: number;
-        docked_ships: string[];
+        available_items: Iitem
+        x: number
+        y: number
+        docked_ships: string[]
     }
 }
 
@@ -755,28 +755,35 @@ interface Iship {
     [name: string]: {
         cargo_hold_size: number
         position: string
+        moving: boolean
+        index: number
     }
 }
 
-startCountdown(initialData.game_duration);
+startGameCountdown(initialData.game_duration);
 let money = initialData.initial_credits;
 let moneyText = (<HTMLElement> document.querySelector("#gameStateBar > .text-right"));
 moneyText.textContent = "$" + String(money);
 let planets = initialData.planets as Iplanet;
 let ships = initialData.starships as Iship;
 
-// Initialize ships and planets
+// Initialize ships and planets (ship indexes initialized later)
 for (let planetName in planets) {
     planets[planetName].docked_ships = [];
 }
 
 for (let shipName in ships) {
+    ships[shipName].moving = false;
     planets[ships[shipName].position].docked_ships.push(shipName);
 }
 
 // Fill ship table
-let shipsTableBody = (<HTMLTableElement> document.querySelector("#shipWindow > .table-wrapped")).createTBody();
+let shipsTableBody = (<HTMLTableElement> document.querySelector("#shipWindow > table")).createTBody();
+let currentIndex = 0;
 for (let shipName in ships) {
+    ships[shipName].index = currentIndex;
+    currentIndex++;
+
     let row = shipsTableBody.insertRow();
 
     let nameCell = row.insertCell();
@@ -810,7 +817,7 @@ for (let planetName in planets) {
     planetWindowDiv.appendChild(container);
 }
 
-function startCountdown(seconds){
+function startGameCountdown(seconds){
     let counter = seconds;
     let timerText = (<HTMLElement> document.querySelector("#gameStateBar > .text-middle"));
 
@@ -825,11 +832,12 @@ function startCountdown(seconds){
 }
 
 function openShipPopup(shipName: string) {
+    // Set data
     let planetName = ships[shipName].position;
     document.querySelector(".ship-popup.popup-title > .text-left").textContent = shipName;
     document.querySelector(".ship-popup.popup-title > .text-right").textContent = planetName;
 
-    let goodsTableBody = (<HTMLTableElement> document.querySelector(".scrollable.goods-window.ship-popup > .table-wrapped"))
+    let goodsTableBody = (<HTMLTableElement> document.querySelector(".scrollable.goods-window.ship-popup > table"))
         .createTBody();
     for (let itemName in planets[planetName].available_items) {
         let row = goodsTableBody.insertRow();
@@ -843,6 +851,12 @@ function openShipPopup(shipName: string) {
 
     document.querySelector(".ship-popup.popup-control-window > h3").textContent = "0/" + ships[shipName].cargo_hold_size;
 
+    // Replace planet divs' functionality
+    document.querySelectorAll("#planetWindow > div").forEach( (planetDiv) => {
+        planetDiv.setAttribute("onclick", "moveToPlanet(\"" + shipName + "\", \""
+            + planetDiv.querySelector("h3").textContent + "\")");
+    });
+
     window.location.href = "#shipPopupDocked"
 }
 
@@ -850,7 +864,7 @@ function openPlanetPopup(planetName: string) {
     let title = document.querySelector(".planet-popup.popup-title");
     title.textContent = planetName;
 
-    let goodsTableBody = (<HTMLTableElement> document.querySelector(".scrollable.goods-window.planet-popup > .table-wrapped"))
+    let goodsTableBody = (<HTMLTableElement> document.querySelector(".scrollable.goods-window.planet-popup > table"))
         .createTBody();
     for (let itemName in planets[planetName].available_items) {
         let row = goodsTableBody.insertRow();
@@ -861,7 +875,7 @@ function openPlanetPopup(planetName: string) {
         row.insertCell().textContent = String(planets[planetName].available_items[itemName].available);
     }
 
-    let shipsTableBody = (<HTMLTableElement> document.querySelector(".scrollable.ship-window.planet-popup > .table-wrapped"))
+    let shipsTableBody = (<HTMLTableElement> document.querySelector(".scrollable.ship-window.planet-popup > table"))
         .createTBody();
     for (let shipName of planets[planetName].docked_ships) {
         let cell = shipsTableBody.insertRow().insertCell();
@@ -879,4 +893,22 @@ function closePopup() {
         if (tableBody !== shipsTableBody)
             tableBody.parentNode.removeChild(tableBody);
     });
+}
+
+function moveToPlanet(shipName: string, planetName: string) {
+    ships[shipName].moving = true;
+    ships[shipName].position = planetName;
+
+    let row: Node = document.querySelector("#shipWindow > table").querySelector("tbody").firstChild;
+    for (let i = 0; i < ships[shipName].index; i++)
+        row = row.nextSibling;
+    row.lastChild.textContent = planetName;
+
+    // Roll back planet divs' functionality
+    document.querySelectorAll("#planetWindow > div").forEach( (planetDiv) => {
+        planetDiv.setAttribute("onclick", "openPlanetPopup(\""
+            + planetDiv.querySelector("h3").textContent + "\")");
+    });
+
+    window.location.href = "#";
 }
