@@ -33,7 +33,7 @@
             <div class="wrapper-flex popup-title-bar">
                 <h3 class="popup-title planet-popup">Alderaan</h3>
                 <div id="planetPopupExitButtonWrapper">
-                    <a href="#" class="exit-button planet-popup">X</a>
+                    <div onclick="closePopup()" class="exit-button clickable planet-popup">X</div>
                 </div>
             </div>
             <div class="wrapper-flex popup-content-window">
@@ -64,7 +64,7 @@
     <div class="popup-wrapper ship-popup" id="shipPopupDocked">
         <div class="popup ship-popup">
             <div class="wrapper-flex popup-title-bar ship-popup">
-                <a href="#" class="exit-button ship-popup">X</a>
+                <div onclick="closePopup()" class="clickable exit-button ship-popup">X</div>
                 <div class="popup-title ship-popup">
                     <h3 class="text-left">Axiom</h3>
                     <h3 class="text-middle"><i>DOCKED</i></h3>
@@ -72,7 +72,7 @@
                 </div>
             </div>
             <div class="popup-content-window ship-popup">
-                <div class="scrollable ship-popup goods-window">
+                <div class="scrollable goods-window ship-popup">
                     <table class="table-wrapped">
                         <thead>
                         <tr>

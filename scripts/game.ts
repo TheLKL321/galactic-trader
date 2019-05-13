@@ -837,3 +837,12 @@ function openPlanetPopup(planetName: string) {
 
     window.location.href = "#planetPopup"
 }
+
+function closePopup() {
+    window.location.href = "#";
+    document.querySelectorAll("tbody").forEach( (tableBody) => {
+        if (tableBody !== shipsTableBody) {
+            tableBody.parentNode.removeChild(tableBody);
+        }
+    });
+}
