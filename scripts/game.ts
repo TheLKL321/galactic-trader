@@ -747,6 +747,7 @@ interface Iplanet {
         available_items: Iitem;
         x: number;
         y: number;
+        docked_ships: string[];
     }
 }
 
@@ -761,9 +762,17 @@ startCountdown(initialData.game_duration);
 let money = initialData.initial_credits;
 let moneyText = (<HTMLElement> document.querySelector("#gameStateBar > .text-right"));
 moneyText.textContent = "$" + String(money);
-let items = initialData.items as Iitem;
 let planets = initialData.planets as Iplanet;
 let ships = initialData.starships as Iship;
+
+// Initialize ships and planets
+for (let planetName in planets) {
+    planets[planetName].docked_ships = [];
+}
+
+for (let shipName in ships) {
+    planets[ships[shipName].position].docked_ships.push(shipName);
+}
 
 // Fill ship table
 let shipsTableBody = (<HTMLTableElement> document.querySelector("#shipWindow > .table-wrapped")).createTBody();
@@ -832,6 +841,8 @@ function openShipPopup(shipName: string) {
         row.insertCell().textContent = String(planets[planetName].available_items[itemName].available);
     }
 
+    document.querySelector(".ship-popup.popup-control-window > h3").textContent = "0/" + ships[shipName].cargo_hold_size;
+
     window.location.href = "#shipPopupDocked"
 }
 
@@ -848,6 +859,15 @@ function openPlanetPopup(planetName: string) {
         row.insertCell().textContent = String(planets[planetName].available_items[itemName].buy_price);
         row.insertCell().textContent = String(planets[planetName].available_items[itemName].sell_price);
         row.insertCell().textContent = String(planets[planetName].available_items[itemName].available);
+    }
+
+    let shipsTableBody = (<HTMLTableElement> document.querySelector(".scrollable.ship-window.planet-popup > .table-wrapped"))
+        .createTBody();
+    for (let shipName of planets[planetName].docked_ships) {
+        let cell = shipsTableBody.insertRow().insertCell();
+        cell.textContent = shipName;
+        cell.setAttribute("onclick", "openShipPopup(\"" + shipName + "\")");
+        cell.setAttribute("class", "clickable");
     }
 
     window.location.href = "#planetPopup"
