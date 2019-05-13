@@ -161,6 +161,11 @@ tbody > tr:first-child > td {
     margin-top: 75px;
 }
 
+#shipPopupEnroute {
+    width: 100%;
+    display: block;
+}
+
 .ship-popup.popup {
     width: 90%;
     height: 500px;

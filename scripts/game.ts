@@ -832,13 +832,15 @@ function startGameCountdown(seconds){
 }
 
 function openShipPopup(shipName: string) {
-    // Set data
     let planetName = ships[shipName].position;
-    document.querySelector(".ship-popup.popup-title > .text-left").textContent = shipName;
-    document.querySelector(".ship-popup.popup-title > .text-right").textContent = planetName;
+    let popup = "#shipPopup";
+    if (!ships[shipName].moving)
+        popup += "Docked";
+    else
+        popup += "Enroute";
 
-    let goodsTableBody = (<HTMLTableElement> document.querySelector(".scrollable.goods-window.ship-popup > table"))
-        .createTBody();
+    // Set data
+    let goodsTableBody = (<HTMLTableElement>document.querySelector(popup + " table")).createTBody();
     for (let itemName in planets[planetName].available_items) {
         let row = goodsTableBody.insertRow();
 
@@ -849,15 +851,19 @@ function openShipPopup(shipName: string) {
         row.insertCell().textContent = String(planets[planetName].available_items[itemName].available);
     }
 
-    document.querySelector(".ship-popup.popup-control-window > h3").textContent = "0/" + ships[shipName].cargo_hold_size;
+    document.querySelector(popup + " .text-left").textContent = shipName;
+    document.querySelector(popup + " .text-right").textContent = planetName;
+    document.querySelector(popup).querySelector(".ship-popup.popup-control-window > h3")
+        .textContent = "0/" + ships[shipName].cargo_hold_size;
 
-    // Replace planet divs' functionality
-    document.querySelectorAll("#planetWindow > div").forEach( (planetDiv) => {
-        planetDiv.setAttribute("onclick", "moveToPlanet(\"" + shipName + "\", \""
-            + planetDiv.querySelector("h3").textContent + "\")");
-    });
-
-    window.location.href = "#shipPopupDocked"
+    if (!ships[shipName].moving) {
+        // Replace planet divs' functionality
+        document.querySelectorAll("#planetWindow > div").forEach((planetDiv) => {
+            planetDiv.setAttribute("onclick", "moveToPlanet(\"" + shipName + "\", \""
+                + planetDiv.querySelector("h3").textContent + "\")");
+        });
+    }
+    window.location.href = popup;
 }
 
 function openPlanetPopup(planetName: string) {
@@ -905,7 +911,7 @@ function moveToPlanet(shipName: string, planetName: string) {
     let row: Node = document.querySelector("#shipWindow > table").querySelector("tbody").firstChild;
     for (let i = 0; i < ships[shipName].index; i++)
         row = row.nextSibling;
-    row.lastChild.textContent = planetName;
+    row.lastChild.textContent = "En route";
     planets[planetName].docked_ships.push(shipName);
 
     // Roll back planet divs' functionality

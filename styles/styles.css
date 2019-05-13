@@ -83,6 +83,14 @@ a {
     visibility: visible;
 }
 
+.supplementary-popup-wrapper {
+    height: 100%;
+    width: 33%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .popup {
     display: flex;
     border-radius: 5px;
@@ -140,5 +148,13 @@ and (max-device-height: 1370px) {
     .exit-button {
         width: 60px;
         height: 60px;
+    }
+
+    .supplementary-popup-wrapper {
+        height: 100%;
+        width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
