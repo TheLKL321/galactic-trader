@@ -794,7 +794,7 @@ for (let planetName in planets) {
     image.setAttribute("alt", "assets/planet" + randomInt + ".jpg");
 
     let planetTitle = document.createElement("h3");
-    planetTitle.innerText = planetName;
+    planetTitle.textContent = planetName;
 
     container.appendChild(image);
     container.appendChild(planetTitle);
@@ -820,5 +820,20 @@ function openShipPopup(shipName: string) {
 }
 
 function openPlanetPopup(planetName: string) {
-    console.log(planetName);
+    let title = document.querySelector(".planet-popup.popup-title");
+    title.textContent = planetName;
+
+    let goodsTableBody = (<HTMLTableElement> document.querySelector(".scrollable.goods-window.planet-popup > .table-wrapped"))
+        .createTBody();
+    for (let itemName in planets[planetName].available_items) {
+        let row = goodsTableBody.insertRow();
+
+        row.insertCell().textContent = itemName;
+        row.insertCell().textContent = String(planets[planetName].available_items[itemName].buy_price);
+        row.insertCell().textContent = String(planets[planetName].available_items[itemName].sell_price);
+        row.insertCell().textContent = String(planets[planetName].available_items[itemName].available);
+    }
+
+
+    window.location.href = "#planetPopup"
 }
