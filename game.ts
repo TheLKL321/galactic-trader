@@ -1,0 +1,1 @@
+(<HTMLElement> document.querySelector("#gameStateBar > .text-left")).innerText = sessionStorage.getItem("nickname");
