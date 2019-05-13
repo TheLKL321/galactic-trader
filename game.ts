@@ -781,6 +781,26 @@ for (let shipName in ships) {
     positionCell.setAttribute("class", "clickable");
 }
 
+// Fill planet list
+let planetWindowDiv = document.getElementById("planetWindow");
+for (let planetName in planets) {
+    let container = document.createElement("div");
+    container.setAttribute("class", "planet clickable");
+    container.setAttribute("onclick", "openPlanetPopup(\"" + planetName + "\")");
+
+    let image = document.createElement("img");
+    let randomInt = Math.floor(Math.random() * 3) + 1;
+    image.setAttribute("src", "assets/planet" + randomInt + ".jpg");
+    image.setAttribute("alt", "assets/planet" + randomInt + ".jpg");
+
+    let planetTitle = document.createElement("h3");
+    planetTitle.innerText = planetName;
+
+    container.appendChild(image);
+    container.appendChild(planetTitle);
+    planetWindowDiv.appendChild(container);
+}
+
 function startCountdown(seconds){
     let counter = seconds;
     let timerText = (<HTMLElement> document.querySelector("#gameStateBar > .text-middle"));
