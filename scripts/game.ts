@@ -897,12 +897,16 @@ function closePopup() {
 
 function moveToPlanet(shipName: string, planetName: string) {
     ships[shipName].moving = true;
+    planets[ships[shipName].position].docked_ships = planets[ships[shipName].position].docked_ships.filter( (item) => {
+        return item !== shipName;
+    });
     ships[shipName].position = planetName;
 
     let row: Node = document.querySelector("#shipWindow > table").querySelector("tbody").firstChild;
     for (let i = 0; i < ships[shipName].index; i++)
         row = row.nextSibling;
     row.lastChild.textContent = planetName;
+    planets[planetName].docked_ships.push(shipName);
 
     // Roll back planet divs' functionality
     document.querySelectorAll("#planetWindow > div").forEach( (planetDiv) => {
