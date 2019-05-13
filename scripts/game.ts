@@ -816,7 +816,23 @@ function startCountdown(seconds){
 }
 
 function openShipPopup(shipName: string) {
-    console.log(shipName);
+    let planetName = ships[shipName].position;
+    document.querySelector(".ship-popup.popup-title > .text-left").textContent = shipName;
+    document.querySelector(".ship-popup.popup-title > .text-right").textContent = planetName;
+
+    let goodsTableBody = (<HTMLTableElement> document.querySelector(".scrollable.goods-window.ship-popup > .table-wrapped"))
+        .createTBody();
+    for (let itemName in planets[planetName].available_items) {
+        let row = goodsTableBody.insertRow();
+
+        row.insertCell().textContent = "0";
+        row.insertCell().textContent = itemName;
+        row.insertCell().textContent = String(planets[planetName].available_items[itemName].buy_price);
+        row.insertCell().textContent = String(planets[planetName].available_items[itemName].sell_price);
+        row.insertCell().textContent = String(planets[planetName].available_items[itemName].available);
+    }
+
+    window.location.href = "#shipPopupDocked"
 }
 
 function openPlanetPopup(planetName: string) {
@@ -834,15 +850,13 @@ function openPlanetPopup(planetName: string) {
         row.insertCell().textContent = String(planets[planetName].available_items[itemName].available);
     }
 
-
     window.location.href = "#planetPopup"
 }
 
 function closePopup() {
     window.location.href = "#";
     document.querySelectorAll("tbody").forEach( (tableBody) => {
-        if (tableBody !== shipsTableBody) {
+        if (tableBody !== shipsTableBody)
             tableBody.parentNode.removeChild(tableBody);
-        }
     });
 }
