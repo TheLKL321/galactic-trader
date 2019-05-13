@@ -127,6 +127,10 @@ a {
     margin-left: 4px;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
 /* MOBILE STYLE //////////////////////////////////////////////////////////////////////////////////////////////////////*/
 @media screen
 and (min-device-width: 320px)

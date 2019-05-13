@@ -764,13 +764,22 @@ moneyText.textContent = "$" + String(money);
 let items = initialData.items as Iitem;
 let planets = initialData.planets as Iplanet;
 let ships = initialData.starships as Iship;
-let shipsTable = <HTMLTableElement> document.querySelector("#shipWindow > .table-wrapped");
-for (let shipName in ships) {
-    let row = shipsTable.insertRow();
-    row.insertCell().textContent = shipName;
-    row.insertCell().textContent = ships[shipName].position;
-}
 
+// Fill ship table
+let shipsTableBody = (<HTMLTableElement> document.querySelector("#shipWindow > .table-wrapped")).createTBody();
+for (let shipName in ships) {
+    let row = shipsTableBody.insertRow();
+
+    let nameCell = row.insertCell();
+    nameCell.textContent = shipName;
+    nameCell.setAttribute("onclick", "openShipPopup(\"" + shipName + "\")");
+    nameCell.setAttribute("class", "clickable");
+
+    let positionCell = row.insertCell();
+    positionCell.textContent = ships[shipName].position;
+    positionCell.setAttribute("onclick", "openPlanetPopup(\"" + ships[shipName].position + "\")");
+    positionCell.setAttribute("class", "clickable");
+}
 
 function startCountdown(seconds){
     let counter = seconds;
@@ -784,4 +793,12 @@ function startCountdown(seconds){
             clearInterval(interval);
         }
     }, 1000);
+}
+
+function openShipPopup(shipName: string) {
+    console.log(shipName);
+}
+
+function openPlanetPopup(planetName: string) {
+    console.log(planetName);
 }
