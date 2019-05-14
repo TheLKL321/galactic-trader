@@ -32,6 +32,10 @@ tbody > tr:first-child > td {
     overflow: auto;
 }
 
+.highlighted {
+    background: var(--accent);
+}
+
 /* Game screen */
 #gameStateBar {
     display: flex;
@@ -111,7 +115,7 @@ tbody > tr:first-child > td {
 }
 
 .goods-window {
-    background: var(--secondary-lighter);
+    background: var(--secondary);
 }
 
 /* Planet popup */
@@ -198,6 +202,18 @@ tbody > tr:first-child > td {
 .ship-popup.goods-window {
     height: calc(100% - 105px);
     padding: 15px;
+}
+
+.ship-popup.goods-window tr:hover {
+    background: var(--secondary-lighter);
+}
+
+.ship-popup.goods-window tr.highlighted:hover {
+    background: var(--accent);
+}
+
+thead tr:hover {
+    background: none !important;
 }
 
 .ship-popup.popup-control-window {

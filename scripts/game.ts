@@ -751,12 +751,17 @@ interface Iplanet {
     }
 }
 
+interface IcargoBay {
+    [name: string]: number
+}
 interface Iship {
     [name: string]: {
         cargo_hold_size: number
         position: string
         moving: boolean
         index: number
+        cargo_load: number
+        cargo_bay: IcargoBay
     }
 }
 
@@ -764,10 +769,12 @@ startGameCountdown(initialData.game_duration);
 let money = initialData.initial_credits;
 let moneyText = (<HTMLElement> document.querySelector("#gameStateBar > .text-right"));
 moneyText.textContent = "$" + String(money);
+let items = initialData.items as string[];
 let planets = initialData.planets as Iplanet;
 let ships = initialData.starships as Iship;
 let shipClicked = "";
 let planetClicked = "";
+let itemClicked = "";
 
 // Initialize ships and planets (ship indexes initialized later)
 for (let planetName in planets) {
@@ -777,6 +784,10 @@ for (let planetName in planets) {
 for (let shipName in ships) {
     ships[shipName].moving = false;
     planets[ships[shipName].position].docked_ships.push(shipName);
+    ships[shipName].cargo_load = 0;
+    ships[shipName].cargo_bay = [] as unknown as IcargoBay;
+    for (let item of items)
+        ships[shipName].cargo_bay[item] = 0;
 }
 
 // Fill ship table
@@ -846,8 +857,11 @@ function openShipPopup(shipName: string) {
 
     // Set data
     let goodsTableBody = (<HTMLTableElement>document.querySelector(popup + " table")).createTBody();
-    for (let itemName in planets[planetName].available_items) {
+    let itemsToShow = Object.keys(planets[planetName].available_items);
+    for (let itemName of itemsToShow) {
         let row = goodsTableBody.insertRow();
+        if (!ships[shipName].moving)
+            row.setAttribute("onclick", "selectItem(\"" + itemName + "\")");
 
         row.insertCell().textContent = "0";
         row.insertCell().textContent = itemName;
@@ -900,26 +914,11 @@ function openPlanetPopup(planetName: string) {
     window.location.href = "#planetPopup"
 }
 
-// Closes currently opened popup
-function closePopup() {
-    window.location.href = "#";
-
-    // Clear popup data
-    document.querySelectorAll("tbody").forEach( (tableBody) => {
-        if (tableBody !== shipsTableBody)
-            tableBody.parentNode.removeChild(tableBody);
-    });
-
-    // Roll back planet divs' functionality
-    if (shipClicked !== "" && !ships[shipClicked].moving) {
-        document.querySelectorAll("#planetWindow > div").forEach((planetDiv) => {
-            planetDiv.setAttribute("onclick", "openPlanetPopup(\""
-                + planetDiv.querySelector("h3").textContent + "\")");
-        });
-    }
-
-    shipClicked = "";
-    planetClicked = "";
+function selectItem(itemName: string) {
+    if (itemClicked !== "")
+        findRow(itemClicked).removeAttribute("class");
+    itemClicked = itemName;
+    findRow(itemName).setAttribute("class", "highlighted");
 }
 
 // Initiates a journey for a ship to a planet
@@ -975,8 +974,39 @@ function moveToPlanet(shipName: string, planetName: string) {
     openShipPopup(shipName);
 }
 
+// Closes currently opened popup
+function closePopup() {
+    window.location.href = "#";
+
+    // Clear popup data
+    document.querySelectorAll("tbody").forEach( (tableBody) => {
+        if (tableBody !== shipsTableBody)
+            tableBody.parentNode.removeChild(tableBody);
+    });
+
+    // Roll back planet divs' functionality
+    if (shipClicked !== "" && !ships[shipClicked].moving) {
+        document.querySelectorAll("#planetWindow > div").forEach((planetDiv) => {
+            planetDiv.setAttribute("onclick", "openPlanetPopup(\""
+                + planetDiv.querySelector("h3").textContent + "\")");
+        });
+    }
+
+    shipClicked = "";
+    planetClicked = "";
+    itemClicked = "";
+}
+
 // Returns the distance between a ship and a planet rounded to the nearest integer
 function calcDistance(shipName: string, planetName: string) : number {
     let dockedAt = ships[shipName].position;
     return Math.round(Math.sqrt((planets[dockedAt].x - planets[planetName].x) ** 2 + (planets[dockedAt].y - planets[planetName].y) ** 2));
+}
+
+// Returns the row of shipPopupDocked goods table that contains given string
+function findRow(name: string) {
+    let row = document.querySelector("#shipPopupDocked tbody").firstElementChild;
+    while (row.children[1].innerHTML !== name)
+        row = row.nextElementSibling;
+    return row;
 }
