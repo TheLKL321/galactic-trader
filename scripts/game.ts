@@ -767,6 +767,7 @@ moneyText.textContent = "$" + String(money);
 let planets = initialData.planets as Iplanet;
 let ships = initialData.starships as Iship;
 let shipClicked = "";
+let planetClicked = "";
 
 // Initialize ships and planets (ship indexes initialized later)
 for (let planetName in planets) {
@@ -872,6 +873,7 @@ function openShipPopup(shipName: string) {
 
 // Opens a popup for a given planet
 function openPlanetPopup(planetName: string) {
+    planetClicked = planetName;
     let title = document.querySelector(".planet-popup.popup-title");
     title.textContent = planetName;
 
@@ -898,14 +900,26 @@ function openPlanetPopup(planetName: string) {
     window.location.href = "#planetPopup"
 }
 
-// Closes currently opened popup and clears popup data
+// Closes currently opened popup
 function closePopup() {
     window.location.href = "#";
+
+    // Clear popup data
     document.querySelectorAll("tbody").forEach( (tableBody) => {
         if (tableBody !== shipsTableBody)
             tableBody.parentNode.removeChild(tableBody);
     });
+
+    // Roll back planet divs' functionality
+    if (shipClicked !== "" && !ships[shipClicked].moving) {
+        document.querySelectorAll("#planetWindow > div").forEach((planetDiv) => {
+            planetDiv.setAttribute("onclick", "openPlanetPopup(\""
+                + planetDiv.querySelector("h3").textContent + "\")");
+        });
+    }
+
     shipClicked = "";
+    planetClicked = "";
 }
 
 // Initiates a journey for a ship to a planet
@@ -913,7 +927,7 @@ function moveToPlanet(shipName: string, planetName: string) {
     if (ships[shipName].position === planetName)
         return;
 
-    let distance = calcDistance(shipName, planetName);
+    let distance = 10; //calcDistance(shipName, planetName); TODO: restore
 
     ships[shipName].moving = true;
     planets[ships[shipName].position].docked_ships = planets[ships[shipName].position].docked_ships.filter( (ship) => {
@@ -942,6 +956,10 @@ function moveToPlanet(shipName: string, planetName: string) {
             if (shipClicked === shipName) {
                 closePopup();
                 openShipPopup(shipName);
+            }
+            if (planetClicked === planetName) {
+                closePopup();
+                openPlanetPopup(planetName);
             }
             clearInterval(interval);
         }
