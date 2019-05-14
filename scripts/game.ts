@@ -766,6 +766,7 @@ let moneyText = (<HTMLElement> document.querySelector("#gameStateBar > .text-rig
 moneyText.textContent = "$" + String(money);
 let planets = initialData.planets as Iplanet;
 let ships = initialData.starships as Iship;
+let shipClicked = "";
 
 // Initialize ships and planets (ship indexes initialized later)
 for (let planetName in planets) {
@@ -817,12 +818,13 @@ for (let planetName in planets) {
     planetWindowDiv.appendChild(container);
 }
 
+// Starts the main game countdown
 function startGameCountdown(seconds){
     let counter = seconds;
     let timerText = (<HTMLElement> document.querySelector("#gameStateBar > .text-middle"));
 
     const interval = setInterval(() => {
-        timerText.textContent = counter;
+        timerText.textContent = String(counter);
         counter--;
 
         if (counter < 0) {
@@ -831,7 +833,9 @@ function startGameCountdown(seconds){
     }, 1000);
 }
 
+// Opens a popup for a given ship
 function openShipPopup(shipName: string) {
+    shipClicked = shipName;
     let planetName = ships[shipName].position;
     let popup = "#shipPopup";
     if (!ships[shipName].moving)
@@ -866,6 +870,7 @@ function openShipPopup(shipName: string) {
     window.location.href = popup;
 }
 
+// Opens a popup for a given planet
 function openPlanetPopup(planetName: string) {
     let title = document.querySelector(".planet-popup.popup-title");
     title.textContent = planetName;
@@ -893,18 +898,26 @@ function openPlanetPopup(planetName: string) {
     window.location.href = "#planetPopup"
 }
 
+// Closes currently opened popup and clears popup data
 function closePopup() {
     window.location.href = "#";
     document.querySelectorAll("tbody").forEach( (tableBody) => {
         if (tableBody !== shipsTableBody)
             tableBody.parentNode.removeChild(tableBody);
     });
+    shipClicked = "";
 }
 
+// Initiates a journey for a ship to a planet
 function moveToPlanet(shipName: string, planetName: string) {
+    if (ships[shipName].position === planetName)
+        return;
+
+    let distance = calcDistance(shipName, planetName);
+
     ships[shipName].moving = true;
-    planets[ships[shipName].position].docked_ships = planets[ships[shipName].position].docked_ships.filter( (item) => {
-        return item !== shipName;
+    planets[ships[shipName].position].docked_ships = planets[ships[shipName].position].docked_ships.filter( (ship) => {
+        return ship !== shipName;
     });
     ships[shipName].position = planetName;
 
@@ -912,7 +925,27 @@ function moveToPlanet(shipName: string, planetName: string) {
     for (let i = 0; i < ships[shipName].index; i++)
         row = row.nextSibling;
     row.lastChild.textContent = "En route";
-    planets[planetName].docked_ships.push(shipName);
+
+    // Time the journey
+    let etaText = <HTMLElement> document.querySelector("#shipPopupEnroute .ship-popup.popup-control-window").lastElementChild;
+    etaText.textContent = "ETA: " + String(distance);
+    distance--;
+    const interval = setInterval(() => {
+        if (shipClicked === shipName)
+            etaText.textContent = "ETA: " + String(distance);
+        distance--;
+
+        if (distance < 0) {
+            planets[planetName].docked_ships.push(shipName);
+            row.lastChild.textContent = planetName;
+            ships[shipName].moving = false;
+            if (shipClicked === shipName) {
+                closePopup();
+                openShipPopup(shipName);
+            }
+            clearInterval(interval);
+        }
+    }, 1000);
 
     // Roll back planet divs' functionality
     document.querySelectorAll("#planetWindow > div").forEach( (planetDiv) => {
@@ -920,5 +953,12 @@ function moveToPlanet(shipName: string, planetName: string) {
             + planetDiv.querySelector("h3").textContent + "\")");
     });
 
-    window.location.href = "#";
+    closePopup();
+    openShipPopup(shipName);
+}
+
+// Returns the distance between a ship and a planet rounded to the nearest integer
+function calcDistance(shipName: string, planetName: string) : number {
+    let dockedAt = ships[shipName].position;
+    return Math.round(Math.sqrt((planets[dockedAt].x - planets[planetName].x) ** 2 + (planets[dockedAt].y - planets[planetName].y) ** 2));
 }
