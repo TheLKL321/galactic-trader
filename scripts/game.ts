@@ -860,8 +860,10 @@ function openShipPopup(shipName: string) {
     let itemsToShow = Object.keys(planets[planetName].available_items);
     for (let itemName of itemsToShow) {
         let row = goodsTableBody.insertRow();
-        if (!ships[shipName].moving)
+        if (!ships[shipName].moving) {
             row.setAttribute("onclick", "selectItem(\"" + itemName + "\")");
+            row.setAttribute("class", "clickable");
+        }
 
         row.insertCell().textContent = "0";
         row.insertCell().textContent = itemName;
@@ -916,7 +918,7 @@ function openPlanetPopup(planetName: string) {
 
 function selectItem(itemName: string) {
     if (itemClicked !== "")
-        findRow(itemClicked).removeAttribute("class");
+        findRow(itemClicked).setAttribute("class", "clickable");
     itemClicked = itemName;
     findRow(itemName).setAttribute("class", "highlighted");
 }
