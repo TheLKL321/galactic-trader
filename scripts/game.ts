@@ -756,12 +756,12 @@ interface IcargoBay {
 }
 interface Iship {
     [name: string]: {
-        cargo_hold_size: number
-        position: string
-        moving: boolean
-        index: number
-        cargo_load: number
-        cargo_bay: IcargoBay
+        cargo_hold_size: number     // max capacity
+        position: string            // docking planet or destination
+        moving: boolean             // if enroute
+        index: number               // index in ship table in game window
+        cargo_load: number          // current load
+        cargo_bay: IcargoBay        // current amount of specific cargo
     }
 }
 
@@ -865,7 +865,7 @@ function openShipPopup(shipName: string) {
             row.setAttribute("class", "clickable");
         }
 
-        row.insertCell().textContent = "0";
+        row.insertCell().textContent = String(ships[shipName].cargo_bay[itemName]);
         row.insertCell().textContent = itemName;
         row.insertCell().textContent = String(planets[planetName].available_items[itemName].buy_price);
         row.insertCell().textContent = String(planets[planetName].available_items[itemName].sell_price);
@@ -875,7 +875,7 @@ function openShipPopup(shipName: string) {
     document.querySelector(popup + " .text-left").textContent = shipName;
     document.querySelector(popup + " .text-right").textContent = planetName;
     document.querySelector(popup).querySelector(".ship-popup.popup-control-window > h3")
-        .textContent = "0/" + ships[shipName].cargo_hold_size;
+        .textContent = ships[shipName].cargo_load + "/" + ships[shipName].cargo_hold_size;
 
     if (!ships[shipName].moving) {
         // Replace planet divs' functionality
@@ -917,10 +917,60 @@ function openPlanetPopup(planetName: string) {
 }
 
 function selectItem(itemName: string) {
-    if (itemClicked !== "")
+    let inputElement = document.querySelector("#shipPopupDocked input");
+    if (itemClicked !== "") {
         findRow(itemClicked).setAttribute("class", "clickable");
+    } else {
+        inputElement.removeAttribute("disabled");
+        document.querySelector("#shipPopupDocked button").removeAttribute("disabled");
+    }
+    let selectedRow = findRow(itemName);
+    let buyPrice = planets[ships[shipClicked].position].available_items[itemName].buy_price;
+    let onPlanet =  planets[ships[shipClicked].position].available_items[itemName].available;
+    let onShip = ships[shipClicked].cargo_bay[itemName];
+    inputElement.setAttribute("max", String(Math.min(Math.floor(money / buyPrice),
+        ships[shipClicked].cargo_hold_size - ships[shipClicked].cargo_load ,onPlanet)));
+    inputElement.setAttribute("min", String(-1 * onShip));
+    selectedRow.setAttribute("class", "highlighted");
     itemClicked = itemName;
-    findRow(itemName).setAttribute("class", "highlighted");
+}
+
+// Trades the selected item of amount given by input in ship popup
+function tradeItem() {
+    let inputElement = (<HTMLInputElement>document.querySelector("#shipPopupDocked input"));
+    let amount = Number(inputElement.value);
+    if (amount === 0)
+        return;
+
+    let buyPrice = planets[ships[shipClicked].position].available_items[itemClicked].buy_price;
+    let onPlanet =  planets[ships[shipClicked].position].available_items[itemClicked].available;
+    let onShip = ships[shipClicked].cargo_bay[itemClicked];
+    amount = Math.min(amount, Math.floor(money / buyPrice), ships[shipClicked].cargo_hold_size - ships[shipClicked].cargo_load, onPlanet);
+    amount = Math.max(amount, -1 * onShip);
+
+    // Update real values
+    planets[ships[shipClicked].position].available_items[itemClicked].available -= amount;
+    ships[shipClicked].cargo_bay[itemClicked] += amount;
+    ships[shipClicked].cargo_load += amount;
+    if (amount > 0)
+        money -= amount * planets[ships[shipClicked].position].available_items[itemClicked].buy_price;
+    else
+        money -= amount * planets[ships[shipClicked].position].available_items[itemClicked].sell_price;
+    moneyText.textContent = "$" + String(money);
+
+    // Update layout
+    let row = findRow(itemClicked);
+    row.children[0].textContent = String(ships[shipClicked].cargo_bay[itemClicked]);
+    row.children[4].textContent = String(planets[ships[shipClicked].position].available_items[itemClicked].available);
+    document.getElementById("shipPopupDocked").querySelector(".ship-popup.popup-control-window > h3")
+        .textContent = ships[shipClicked].cargo_load + "/" + ships[shipClicked].cargo_hold_size;
+
+    onPlanet =  planets[ships[shipClicked].position].available_items[itemClicked].available;
+    onShip = ships[shipClicked].cargo_bay[itemClicked];
+    inputElement.setAttribute("max", String(Math.min(Math.floor(money / buyPrice),
+        ships[shipClicked].cargo_hold_size - ships[shipClicked].cargo_load ,onPlanet)));
+    inputElement.setAttribute("min", String(-1 * onShip));
+    inputElement.value = String(0);
 }
 
 // Initiates a journey for a ship to a planet
@@ -985,6 +1035,8 @@ function closePopup() {
         if (tableBody !== shipsTableBody)
             tableBody.parentNode.removeChild(tableBody);
     });
+    document.querySelector("#shipPopupDocked input").setAttribute("disabled", "disabled");
+    document.querySelector("#shipPopupDocked button").setAttribute("disabled", "disabled");
 
     // Roll back planet divs' functionality
     if (shipClicked !== "" && !ships[shipClicked].moving) {
