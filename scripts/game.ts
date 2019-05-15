@@ -779,6 +779,10 @@ let itemClicked = "";
 // Initialize ships and planets (ship indexes initialized later)
 for (let planetName in planets) {
     planets[planetName].docked_ships = [];
+    for (let itemName of items) {
+        if (planets[planetName].available_items[itemName] === undefined)
+            planets[planetName].available_items[itemName] = {available: 0, buy_price: 0, sell_price: 0};
+    }
 }
 
 for (let shipName in ships) {
@@ -786,8 +790,8 @@ for (let shipName in ships) {
     planets[ships[shipName].position].docked_ships.push(shipName);
     ships[shipName].cargo_load = 0;
     ships[shipName].cargo_bay = [] as unknown as IcargoBay;
-    for (let item of items)
-        ships[shipName].cargo_bay[item] = 0;
+    for (let itemName of items)
+        ships[shipName].cargo_bay[itemName] = 0;
 }
 
 // Fill ship table
@@ -847,6 +851,7 @@ function startGameCountdown(seconds){
 
 // Opens a popup for a given ship
 function openShipPopup(shipName: string) {
+    closePopup();
     shipClicked = shipName;
     let planetName = ships[shipName].position;
     let popup = "#shipPopup";
@@ -857,8 +862,15 @@ function openShipPopup(shipName: string) {
 
     // Set data
     let goodsTableBody = (<HTMLTableElement>document.querySelector(popup + " table")).createTBody();
-    let itemsToShow = Object.keys(planets[planetName].available_items);
-    for (let itemName of itemsToShow) {
+    /*let planetItemsToShow = Object.keys(planets[planetName].available_items);
+    let shipItemsToShow = [];
+    for (let shipItem in ships[shipName].cargo_bay) {
+        if (planetItemsToShow.indexOf(shipItem) === -1)
+            shipItemsToShow.push(shipItem);
+    }*/
+    
+    
+    for (let itemName of items) {
         let row = goodsTableBody.insertRow();
         if (!ships[shipName].moving) {
             row.setAttribute("onclick", "selectItem(\"" + itemName + "\")");
@@ -872,6 +884,20 @@ function openShipPopup(shipName: string) {
         row.insertCell().textContent = String(planets[planetName].available_items[itemName].available);
     }
 
+    /*for (let shipItemName of shipItemsToShow) {
+        let row = goodsTableBody.insertRow();
+        if (!ships[shipName].moving) {
+            row.setAttribute("onclick", "selectItem(\"" + shipItemName + "\")");
+            row.setAttribute("class", "clickable");
+        }
+
+        row.insertCell().textContent = String(ships[shipName].cargo_bay[shipItemName]);
+        row.insertCell().textContent = shipItemName;
+        row.insertCell().textContent = String(0);
+        row.insertCell().textContent = String(0);
+        row.insertCell().textContent = String(0);
+    }
+*/
     document.querySelector(popup + " .text-left").textContent = shipName;
     document.querySelector(popup + " .text-right").textContent = planetName;
     document.querySelector(popup).querySelector(".ship-popup.popup-control-window > h3")
@@ -889,6 +915,7 @@ function openShipPopup(shipName: string) {
 
 // Opens a popup for a given planet
 function openPlanetPopup(planetName: string) {
+    closePopup();
     planetClicked = planetName;
     let title = document.querySelector(".planet-popup.popup-title");
     title.textContent = planetName;
@@ -925,14 +952,9 @@ function selectItem(itemName: string) {
         document.querySelector("#shipPopupDocked button").removeAttribute("disabled");
     }
     let selectedRow = findRow(itemName);
-    let buyPrice = planets[ships[shipClicked].position].available_items[itemName].buy_price;
-    let onPlanet =  planets[ships[shipClicked].position].available_items[itemName].available;
-    let onShip = ships[shipClicked].cargo_bay[itemName];
-    inputElement.setAttribute("max", String(Math.min(Math.floor(money / buyPrice),
-        ships[shipClicked].cargo_hold_size - ships[shipClicked].cargo_load ,onPlanet)));
-    inputElement.setAttribute("min", String(-1 * onShip));
     selectedRow.setAttribute("class", "highlighted");
     itemClicked = itemName;
+    resetInputElement()
 }
 
 // Trades the selected item of amount given by input in ship popup
@@ -965,12 +987,7 @@ function tradeItem() {
     document.getElementById("shipPopupDocked").querySelector(".ship-popup.popup-control-window > h3")
         .textContent = ships[shipClicked].cargo_load + "/" + ships[shipClicked].cargo_hold_size;
 
-    onPlanet =  planets[ships[shipClicked].position].available_items[itemClicked].available;
-    onShip = ships[shipClicked].cargo_bay[itemClicked];
-    inputElement.setAttribute("max", String(Math.min(Math.floor(money / buyPrice),
-        ships[shipClicked].cargo_hold_size - ships[shipClicked].cargo_load ,onPlanet)));
-    inputElement.setAttribute("min", String(-1 * onShip));
-    inputElement.value = String(0);
+    resetInputElement()
 }
 
 // Initiates a journey for a ship to a planet
@@ -980,12 +997,14 @@ function moveToPlanet(shipName: string, planetName: string) {
 
     let distance = 10; //calcDistance(shipName, planetName); TODO: restore
 
+    // Remove the ship from planet docklist
     ships[shipName].moving = true;
     planets[ships[shipName].position].docked_ships = planets[ships[shipName].position].docked_ships.filter( (ship) => {
         return ship !== shipName;
     });
     ships[shipName].position = planetName;
 
+    // Set the ship status to "En route"
     let row: Node = document.querySelector("#shipWindow > table").querySelector("tbody").firstChild;
     for (let i = 0; i < ships[shipName].index; i++)
         row = row.nextSibling;
@@ -1046,15 +1065,10 @@ function closePopup() {
         });
     }
 
+    // Reset current selections
     shipClicked = "";
     planetClicked = "";
     itemClicked = "";
-}
-
-// Returns the distance between a ship and a planet rounded to the nearest integer
-function calcDistance(shipName: string, planetName: string) : number {
-    let dockedAt = ships[shipName].position;
-    return Math.round(Math.sqrt((planets[dockedAt].x - planets[planetName].x) ** 2 + (planets[dockedAt].y - planets[planetName].y) ** 2));
 }
 
 // Returns the row of shipPopupDocked goods table that contains given string
@@ -1063,4 +1077,21 @@ function findRow(name: string) {
     while (row.children[1].innerHTML !== name)
         row = row.nextElementSibling;
     return row;
+}
+
+function resetInputElement() {
+    let inputElement = (<HTMLInputElement>document.querySelector("#shipPopupDocked input"));
+    let buyPrice = planets[ships[shipClicked].position].available_items[itemClicked].buy_price;
+    let onPlanet =  planets[ships[shipClicked].position].available_items[itemClicked].available;
+    let onShip = ships[shipClicked].cargo_bay[itemClicked];
+    inputElement.setAttribute("max", String(Math.min(Math.floor(money / buyPrice),
+        ships[shipClicked].cargo_hold_size - ships[shipClicked].cargo_load ,onPlanet)));
+    inputElement.setAttribute("min", String(-1 * onShip));
+    inputElement.value = String(0);
+}
+
+// Returns the distance between a ship and a planet rounded to the nearest integer
+function calcDistance(shipName: string, planetName: string) : number {
+    let dockedAt = ships[shipName].position;
+    return Math.round(Math.sqrt((planets[dockedAt].x - planets[planetName].x) ** 2 + (planets[dockedAt].y - planets[planetName].y) ** 2));
 }
