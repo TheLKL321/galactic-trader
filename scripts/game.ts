@@ -862,14 +862,6 @@ function openShipPopup(shipName: string) {
 
     // Set data
     let goodsTableBody = (<HTMLTableElement>document.querySelector(popup + " table")).createTBody();
-    /*let planetItemsToShow = Object.keys(planets[planetName].available_items);
-    let shipItemsToShow = [];
-    for (let shipItem in ships[shipName].cargo_bay) {
-        if (planetItemsToShow.indexOf(shipItem) === -1)
-            shipItemsToShow.push(shipItem);
-    }*/
-    
-    
     for (let itemName of items) {
         let row = goodsTableBody.insertRow();
         if (!ships[shipName].moving) {
@@ -884,20 +876,6 @@ function openShipPopup(shipName: string) {
         row.insertCell().textContent = String(planets[planetName].available_items[itemName].available);
     }
 
-    /*for (let shipItemName of shipItemsToShow) {
-        let row = goodsTableBody.insertRow();
-        if (!ships[shipName].moving) {
-            row.setAttribute("onclick", "selectItem(\"" + shipItemName + "\")");
-            row.setAttribute("class", "clickable");
-        }
-
-        row.insertCell().textContent = String(ships[shipName].cargo_bay[shipItemName]);
-        row.insertCell().textContent = shipItemName;
-        row.insertCell().textContent = String(0);
-        row.insertCell().textContent = String(0);
-        row.insertCell().textContent = String(0);
-    }
-*/
     document.querySelector(popup + " .text-left").textContent = shipName;
     document.querySelector(popup + " .text-right").textContent = planetName;
     document.querySelector(popup).querySelector(".ship-popup.popup-control-window > h3")
@@ -908,6 +886,10 @@ function openShipPopup(shipName: string) {
         document.querySelectorAll("#planetWindow > div").forEach((planetDiv) => {
             planetDiv.setAttribute("onclick", "moveToPlanet(\"" + shipName + "\", \""
                 + planetDiv.querySelector("h3").textContent + "\")");
+            let distanceTextElement = document.createElement("h3");
+            let distance = calcDistance(shipName, planetDiv.children[1].textContent);
+            distanceTextElement.textContent = distance === 0 ? "DOCKED" : String(distance);
+            planetDiv.appendChild(distanceTextElement);
         });
     }
     window.location.href = popup;
@@ -1035,12 +1017,7 @@ function moveToPlanet(shipName: string, planetName: string) {
         }
     }, 1000);
 
-    // Roll back planet divs' functionality
-    document.querySelectorAll("#planetWindow > div").forEach( (planetDiv) => {
-        planetDiv.setAttribute("onclick", "openPlanetPopup(\""
-            + planetDiv.querySelector("h3").textContent + "\")");
-    });
-
+    restorePlanetDivs();
     closePopup();
     openShipPopup(shipName);
 }
@@ -1057,12 +1034,8 @@ function closePopup() {
     document.querySelector("#shipPopupDocked input").setAttribute("disabled", "disabled");
     document.querySelector("#shipPopupDocked button").setAttribute("disabled", "disabled");
 
-    // Roll back planet divs' functionality
     if (shipClicked !== "" && !ships[shipClicked].moving) {
-        document.querySelectorAll("#planetWindow > div").forEach((planetDiv) => {
-            planetDiv.setAttribute("onclick", "openPlanetPopup(\""
-                + planetDiv.querySelector("h3").textContent + "\")");
-        });
+        restorePlanetDivs();
     }
 
     // Reset current selections
@@ -1079,6 +1052,17 @@ function findRow(name: string) {
     return row;
 }
 
+// Rolls back planet divs to their original functionality (used after closing a docked ship popup)
+function restorePlanetDivs() {
+    document.querySelectorAll("#planetWindow > div").forEach((planetDiv) => {
+        if (planetDiv.childElementCount === 3)
+            planetDiv.removeChild(planetDiv.lastChild);
+        planetDiv.setAttribute("onclick", "openPlanetPopup(\""
+            + planetDiv.querySelector("h3").textContent + "\")");
+    });
+}
+
+// Resets the ship popup input element
 function resetInputElement() {
     let inputElement = (<HTMLInputElement>document.querySelector("#shipPopupDocked input"));
     let buyPrice = planets[ships[shipClicked].position].available_items[itemClicked].buy_price;
