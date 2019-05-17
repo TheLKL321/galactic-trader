@@ -1,4 +1,5 @@
-(<HTMLElement> document.querySelector("#gameStateBar > .text-left")).textContent = sessionStorage.getItem("nickname");
+let nickname = sessionStorage.getItem("nickname");
+(<HTMLElement> document.querySelector("#gameStateBar > .text-left")).textContent = nickname;
 let initialData = JSON.parse("{\n" +
     "    \"game_duration\": 300,\n" +
     "    \"initial_credits\": 1984,\n" +
@@ -765,7 +766,8 @@ interface Iship {
     }
 }
 
-startGameCountdown(initialData.game_duration);
+(<HTMLElement> document.querySelector("#gameStateBar > .text-middle")).innerText = initialData.game_duration;
+startGameCountdown(10);//initialData.game_duration - 1); TODO: restore
 let money = initialData.initial_credits;
 let moneyText = (<HTMLElement> document.querySelector("#gameStateBar > .text-right"));
 moneyText.textContent = "$" + String(money);
@@ -844,6 +846,10 @@ function startGameCountdown(seconds){
         counter--;
 
         if (counter < 0) {
+            let highscores : { nick: string, score: number }[] = JSON.parse(localStorage.getItem("highscores"));
+            highscores.push({ nick: nickname, score: money });
+            localStorage.setItem("highscores", JSON.stringify(highscores));
+            window.location.href = "index.html";
             clearInterval(interval);
         }
     }, 1000);
