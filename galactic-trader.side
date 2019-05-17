@@ -1,0 +1,993 @@
+{
+  "id": "29f51fc3-8438-4558-b72a-ecaa8a1b0254",
+  "version": "2.0",
+  "name": "galactic-trader",
+  "url": "file:///D:/Desktop/Projekty/2rok/WWW/Galactic_Trader/index.html",
+  "tests": [{
+    "id": "764ef0be-303c-4f88-a2bb-cc3020b86fbb",
+    "name": "All menu elements display properly",
+    "commands": [{
+      "id": "dd42a14e-e347-49c4-94ab-9a93b111aafb",
+      "comment": "",
+      "command": "open",
+      "target": "file:///D:/Desktop/Projekty/2rok/WWW/Galactic_Trader/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "77c00816-3b06-4a53-98b3-cb866db9908a",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=h1",
+      "targets": [
+        ["css=h1", "css:finder"],
+        ["xpath=//div[@id='titleBar']/h1", "xpath:idRelative"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'GALACTIC TRADER')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5500e0fd-99d5-4923-b477-561afbc2534e",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=newGameButton",
+      "targets": [
+        ["id=newGameButton", "id"],
+        ["linkText=New game", "linkText"],
+        ["css=#newGameButton", "css:finder"],
+        ["xpath=//a[contains(text(),'New game')]", "xpath:link"],
+        ["xpath=//a[@id='newGameButton']", "xpath:attributes"],
+        ["xpath=//div[@id='newGameBar']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#newGamePopup')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'New game')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "96742538-09ff-4471-b404-328aa12b2620",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=highscoreTable",
+      "targets": [
+        ["id=highscoreTable", "id"],
+        ["css=#highscoreTable", "css:finder"],
+        ["xpath=//table[@id='highscoreTable']", "xpath:attributes"],
+        ["xpath=//table", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "398573ad-8d04-48e5-841b-bf81e3123da4",
+    "name": "Nickname input editable",
+    "commands": [{
+      "id": "8936ff69-80fd-45a0-95d4-94a47a8355b6",
+      "comment": "",
+      "command": "open",
+      "target": "file:///D:/Desktop/Projekty/2rok/WWW/Galactic_Trader/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d8f89cb2-6a37-4b93-8d67-164f4a6c97b9",
+      "comment": "",
+      "command": "click",
+      "target": "id=newGameButton",
+      "targets": [
+        ["id=newGameButton", "id"],
+        ["linkText=New game", "linkText"],
+        ["css=#newGameButton", "css:finder"],
+        ["xpath=//a[contains(text(),'New game')]", "xpath:link"],
+        ["xpath=//a[@id='newGameButton']", "xpath:attributes"],
+        ["xpath=//div[@id='newGameBar']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#newGamePopup')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'New game')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4e9e1f51-b0ac-4ab1-a5c1-cc1bef380c13",
+      "comment": "",
+      "command": "assertEditable",
+      "target": "id=nicknameInput",
+      "targets": [
+        ["id=nicknameInput", "id"],
+        ["css=#nicknameInput", "css:finder"],
+        ["xpath=//input[@id='nicknameInput']", "xpath:attributes"],
+        ["xpath=//div[@id='newGamePopupInput']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "415912f6-5861-4211-9c38-4d969fd48f4c",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=X",
+      "targets": [
+        ["linkText=X", "linkText"],
+        ["css=.exit-button", "css:finder"],
+        ["xpath=//a[contains(text(),'X')]", "xpath:link"],
+        ["xpath=//div[@id='newGamePopup']/div/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '#')])[2]", "xpath:href"],
+        ["xpath=//div[2]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'X')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "be263103-0ad8-4ded-a7a4-ccd5d5748a2d",
+    "name": "Nickname carries over",
+    "commands": [{
+      "id": "81483546-998d-42cc-a7db-d8d48b0c01e5",
+      "comment": "",
+      "command": "open",
+      "target": "file:///D:/Desktop/Projekty/2rok/WWW/Galactic_Trader/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "04a93580-a38e-40a8-8060-c3c0561cd0d9",
+      "comment": "",
+      "command": "click",
+      "target": "id=newGameButton",
+      "targets": [
+        ["id=newGameButton", "id"],
+        ["linkText=New game", "linkText"],
+        ["css=#newGameButton", "css:finder"],
+        ["xpath=//a[contains(text(),'New game')]", "xpath:link"],
+        ["xpath=//a[@id='newGameButton']", "xpath:attributes"],
+        ["xpath=//div[@id='newGameBar']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#newGamePopup')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'New game')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5097ce5e-034c-4b80-9fb7-4f27e360258f",
+      "comment": "",
+      "command": "click",
+      "target": "id=nicknameInput",
+      "targets": [
+        ["id=nicknameInput", "id"],
+        ["css=#nicknameInput", "css:finder"],
+        ["xpath=//input[@id='nicknameInput']", "xpath:attributes"],
+        ["xpath=//div[@id='newGamePopupInput']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "976de909-b918-4041-8b59-b1361d407171",
+      "comment": "",
+      "command": "type",
+      "target": "id=nicknameInput",
+      "targets": [
+        ["id=nicknameInput", "id"],
+        ["css=#nicknameInput", "css:finder"],
+        ["xpath=//input[@id='nicknameInput']", "xpath:attributes"],
+        ["xpath=//div[@id='newGamePopupInput']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "asdf123"
+    }, {
+      "id": "0a8e992d-730f-437d-aceb-6e9d3ec66367",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Begin",
+      "targets": [
+        ["linkText=Begin", "linkText"],
+        ["css=#newGamePopupButtonWrapper > .btn", "css:finder"],
+        ["xpath=//a[contains(text(),'Begin')]", "xpath:link"],
+        ["xpath=//a[@onclick='beginGame()']", "xpath:attributes"],
+        ["xpath=//div[@id='newGamePopupButtonWrapper']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'game.html')]", "xpath:href"],
+        ["xpath=//div/div/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Begin')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "9fe4a4f5-1983-4988-a2ba-6b59af4b6fe2",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=#gameStateBar > .text-left",
+      "targets": [
+        ["css=#gameStateBar > .text-left", "css:finder"],
+        ["xpath=//div[@id='gameStateBar']/h3", "xpath:idRelative"],
+        ["xpath=//h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'asdf')]", "xpath:innerText"]
+      ],
+      "value": "asdf123"
+    }, {
+      "id": "dcc3024e-b5c4-4405-a29a-8f72ff9eb0d7",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "b1ff40f5-6241-4932-87f8-9f6f3e2b9c31",
+    "name": " Ships display properly",
+    "commands": [{
+      "id": "539ea49b-7439-4109-9fda-ee6a5b0d0fa4",
+      "comment": "",
+      "command": "open",
+      "target": "file:///D:/Desktop/Projekty/2rok/WWW/Galactic_Trader/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "76dbcf1d-552b-41c6-88d5-c7dcb462876a",
+      "comment": "",
+      "command": "click",
+      "target": "id=newGameButton",
+      "targets": [
+        ["id=newGameButton", "id"],
+        ["linkText=New game", "linkText"],
+        ["css=#newGameButton", "css:finder"],
+        ["xpath=//a[contains(text(),'New game')]", "xpath:link"],
+        ["xpath=//a[@id='newGameButton']", "xpath:attributes"],
+        ["xpath=//div[@id='newGameBar']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#newGamePopup')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'New game')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "96381412-fc0b-4702-a0b3-33f774102b26",
+      "comment": "",
+      "command": "click",
+      "target": "id=nicknameInput",
+      "targets": [
+        ["id=nicknameInput", "id"],
+        ["css=#nicknameInput", "css:finder"],
+        ["xpath=//input[@id='nicknameInput']", "xpath:attributes"],
+        ["xpath=//div[@id='newGamePopupInput']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d86bf8f8-f920-4a3c-904f-544738c1dfd3",
+      "comment": "",
+      "command": "type",
+      "target": "id=nicknameInput",
+      "targets": [
+        ["id=nicknameInput", "id"],
+        ["css=#nicknameInput", "css:finder"],
+        ["xpath=//input[@id='nicknameInput']", "xpath:attributes"],
+        ["xpath=//div[@id='newGamePopupInput']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "asdf"
+    }, {
+      "id": "d43c860d-8ed3-4f3e-8fc4-c9c72ffb2958",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Begin",
+      "targets": [
+        ["linkText=Begin", "linkText"],
+        ["css=#newGamePopupButtonWrapper > .btn", "css:finder"],
+        ["xpath=//a[contains(text(),'Begin')]", "xpath:link"],
+        ["xpath=//a[@onclick='beginGame()']", "xpath:attributes"],
+        ["xpath=//div[@id='newGamePopupButtonWrapper']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'game.html')]", "xpath:href"],
+        ["xpath=//div/div/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Begin')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c353f81e-6a01-468f-b1fb-86ea70763301",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=tr:nth-child(1) > .clickable:nth-child(1)",
+      "targets": [
+        ["css=tr:nth-child(1) > .clickable:nth-child(1)", "css:finder"],
+        ["xpath=//td[@onclick='openShipPopup(\"Axiom\")']", "xpath:attributes"],
+        ["xpath=//div[@id='shipWindow']/table/tbody/tr/td", "xpath:idRelative"],
+        ["xpath=//td", "xpath:position"],
+        ["xpath=//td[contains(.,'Axiom')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ab7f1cee-30ba-4eb7-9235-36c5a7aaf1eb",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=tr:nth-child(2) > .clickable:nth-child(1)",
+      "targets": [
+        ["css=tr:nth-child(2) > .clickable:nth-child(1)", "css:finder"],
+        ["xpath=//td[@onclick='openShipPopup(\"Enterprise\")']", "xpath:attributes"],
+        ["xpath=//div[@id='shipWindow']/table/tbody/tr[2]/td", "xpath:idRelative"],
+        ["xpath=//tr[2]/td", "xpath:position"],
+        ["xpath=//td[contains(.,'Enterprise')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "027eab75-cd93-4e72-a4ca-d6351c359d40",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=tr:last-child > .clickable:nth-child(1)",
+      "targets": [
+        ["css=tr:nth-child(10) > .clickable:nth-child(1)", "css:finder"],
+        ["xpath=//td[@onclick='openShipPopup(\"Космонавт Алексе́й Лео́нов\")']", "xpath:attributes"],
+        ["xpath=//div[@id='shipWindow']/table/tbody/tr[10]/td", "xpath:idRelative"],
+        ["xpath=//tr[10]/td", "xpath:position"],
+        ["xpath=//td[contains(.,'Космонавт Алексе́й Лео́нов')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "422c3901-10de-4575-a180-9e158915827e",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "eb0503a8-3014-4cd1-b3e2-4e81fa786d99",
+    "name": "Planets display properly",
+    "commands": [{
+      "id": "e170aaf9-bdf6-411a-96b8-55d70a3da505",
+      "comment": "",
+      "command": "open",
+      "target": "file:///D:/Desktop/Projekty/2rok/WWW/Galactic_Trader/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1a9162fb-a61a-4951-98cb-12a7c92ddccf",
+      "comment": "",
+      "command": "click",
+      "target": "id=newGameButton",
+      "targets": [
+        ["id=newGameButton", "id"],
+        ["linkText=New game", "linkText"],
+        ["css=#newGameButton", "css:finder"],
+        ["xpath=//a[contains(text(),'New game')]", "xpath:link"],
+        ["xpath=//a[@id='newGameButton']", "xpath:attributes"],
+        ["xpath=//div[@id='newGameBar']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#newGamePopup')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'New game')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2041de85-4f13-4622-aa9c-f0ae318053cf",
+      "comment": "",
+      "command": "click",
+      "target": "id=nicknameInput",
+      "targets": [
+        ["id=nicknameInput", "id"],
+        ["css=#nicknameInput", "css:finder"],
+        ["xpath=//input[@id='nicknameInput']", "xpath:attributes"],
+        ["xpath=//div[@id='newGamePopupInput']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "03670734-9d9b-4eca-a0e7-24194c8b0318",
+      "comment": "",
+      "command": "type",
+      "target": "id=nicknameInput",
+      "targets": [
+        ["id=nicknameInput", "id"],
+        ["css=#nicknameInput", "css:finder"],
+        ["xpath=//input[@id='nicknameInput']", "xpath:attributes"],
+        ["xpath=//div[@id='newGamePopupInput']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "asd"
+    }, {
+      "id": "d6c28d0a-eaa6-42f0-8c30-8e7d8432af7f",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Begin",
+      "targets": [
+        ["linkText=Begin", "linkText"],
+        ["css=#newGamePopupButtonWrapper > .btn", "css:finder"],
+        ["xpath=//a[contains(text(),'Begin')]", "xpath:link"],
+        ["xpath=//a[@onclick='beginGame()']", "xpath:attributes"],
+        ["xpath=//div[@id='newGamePopupButtonWrapper']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'game.html')]", "xpath:href"],
+        ["xpath=//div/div/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Begin')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "cdf81c59-9726-44d9-842a-3b28451eaff1",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.planet:nth-child(1) > img",
+      "targets": [
+        ["css=.planet:nth-child(1) > img", "css:finder"],
+        ["xpath=//img[@alt='assets/planet1.jpg']", "xpath:img"],
+        ["xpath=//div[@id='planetWindow']/div/img", "xpath:idRelative"],
+        ["xpath=//div[2]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "33e41b0a-98a9-48df-920e-8a7d3456d9e6",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.planet:nth-child(2) > img",
+      "targets": [
+        ["css=.planet:nth-child(1) > img", "css:finder"],
+        ["xpath=//img[@alt='assets/planet1.jpg']", "xpath:img"],
+        ["xpath=//div[@id='planetWindow']/div/img", "xpath:idRelative"],
+        ["xpath=//div[2]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "356627ca-f20b-4ae4-a845-0485a3e16e6e",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.planet:last-child > img",
+      "targets": [
+        ["css=.planet:nth-child(1) > img", "css:finder"],
+        ["xpath=//img[@alt='assets/planet1.jpg']", "xpath:img"],
+        ["xpath=//div[@id='planetWindow']/div/img", "xpath:idRelative"],
+        ["xpath=//div[2]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2bf785d5-9d1a-410a-babd-0c6e9fb91d91",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "43dae2aa-f24c-4ca1-9275-13f64e5f6794",
+    "name": "Distances display from ship popup",
+    "commands": [{
+      "id": "4b2dea9c-74da-489f-9357-dbb643417007",
+      "comment": "",
+      "command": "open",
+      "target": "file:///D:/Desktop/Projekty/2rok/WWW/Galactic_Trader/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "03549e21-35f5-49ab-bd65-ccd6953ff085",
+      "comment": "",
+      "command": "click",
+      "target": "id=newGameButton",
+      "targets": [
+        ["id=newGameButton", "id"],
+        ["linkText=New game", "linkText"],
+        ["css=#newGameButton", "css:finder"],
+        ["xpath=//a[contains(text(),'New game')]", "xpath:link"],
+        ["xpath=//a[@id='newGameButton']", "xpath:attributes"],
+        ["xpath=//div[@id='newGameBar']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#newGamePopup')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'New game')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "9518d5ab-1c10-48a5-bda1-647636350612",
+      "comment": "",
+      "command": "click",
+      "target": "id=nicknameInput",
+      "targets": [
+        ["id=nicknameInput", "id"],
+        ["css=#nicknameInput", "css:finder"],
+        ["xpath=//input[@id='nicknameInput']", "xpath:attributes"],
+        ["xpath=//div[@id='newGamePopupInput']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "807374d6-d4f9-44c6-9f18-1b7821ef3846",
+      "comment": "",
+      "command": "type",
+      "target": "id=nicknameInput",
+      "targets": [
+        ["id=nicknameInput", "id"],
+        ["css=#nicknameInput", "css:finder"],
+        ["xpath=//input[@id='nicknameInput']", "xpath:attributes"],
+        ["xpath=//div[@id='newGamePopupInput']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "asd"
+    }, {
+      "id": "ee7a2636-86e1-4cc6-a033-f0b784bc4857",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Begin",
+      "targets": [
+        ["linkText=Begin", "linkText"],
+        ["css=#newGamePopupButtonWrapper > .btn", "css:finder"],
+        ["xpath=//a[contains(text(),'Begin')]", "xpath:link"],
+        ["xpath=//a[@onclick='beginGame()']", "xpath:attributes"],
+        ["xpath=//div[@id='newGamePopupButtonWrapper']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'game.html')]", "xpath:href"],
+        ["xpath=//div/div/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Begin')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "83ad3117-4987-4660-89a3-ddbe6f63d744",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "css=.planet:nth-child(1) > h3:nth-child(3)",
+      "targets": [
+        ["css=.planet:nth-child(1) > h3:nth-child(3)", "css:finder"],
+        ["xpath=//div[@id='planetWindow']/div/h3[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/div/h3[2]", "xpath:position"],
+        ["xpath=//h3[contains(.,'48')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a355405d-8273-4c0c-b837-a6edeadb0254",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(1) > .clickable:nth-child(1)",
+      "targets": [
+        ["css=tr:nth-child(1) > .clickable:nth-child(1)", "css:finder"],
+        ["xpath=//td[@onclick='openShipPopup(\"Axiom\")']", "xpath:attributes"],
+        ["xpath=//div[@id='shipWindow']/table/tbody/tr/td", "xpath:idRelative"],
+        ["xpath=//td", "xpath:position"],
+        ["xpath=//td[contains(.,'Axiom')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "667de0cc-8f95-4168-bf2b-646a33605c79",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.planet:nth-child(1) > h3:nth-child(3)",
+      "targets": [
+        ["css=.planet:nth-child(1) > h3:nth-child(3)", "css:finder"],
+        ["xpath=//div[@id='planetWindow']/div/h3[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/div/h3[2]", "xpath:position"],
+        ["xpath=//h3[contains(.,'48')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "06b972a7-0380-4659-a9db-702798de6386",
+      "comment": "",
+      "command": "click",
+      "target": "css=#shipPopupDocked .wrapper-flex > .clickable",
+      "targets": [
+        ["css=#shipPopupDocked .wrapper-flex > .clickable", "css:finder"],
+        ["xpath=(//div[@onclick='closePopup()'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='shipPopupDocked']/div/div/div", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d39172c8-450c-4c97-9a9f-517a9c00fdc1",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "css=.planet:nth-child(1) > h3:nth-child(3)",
+      "targets": [
+        ["css=.planet:nth-child(1) > h3:nth-child(3)", "css:finder"],
+        ["xpath=//div[@id='planetWindow']/div/h3[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/div/h3[2]", "xpath:position"],
+        ["xpath=//h3[contains(.,'48')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "82220c80-c089-48c9-aa77-63d5a60553b8",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "23f0821e-99fc-4bb6-85cb-b63e174179aa",
+    "name": "Ship can buy an item",
+    "commands": [{
+      "id": "c33625bc-258f-4ff0-a4c8-a67a604d5cdd",
+      "comment": "",
+      "command": "open",
+      "target": "file:///D:/Desktop/Projekty/2rok/WWW/Galactic_Trader/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4d1c71b5-6d68-468d-9f3b-e49b1a2eecc6",
+      "comment": "",
+      "command": "click",
+      "target": "id=newGameButton",
+      "targets": [
+        ["id=newGameButton", "id"],
+        ["linkText=New game", "linkText"],
+        ["css=#newGameButton", "css:finder"],
+        ["xpath=//a[contains(text(),'New game')]", "xpath:link"],
+        ["xpath=//a[@id='newGameButton']", "xpath:attributes"],
+        ["xpath=//div[@id='newGameBar']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#newGamePopup')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'New game')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "104d44b8-ded4-4703-bec3-a7ad9fa956e0",
+      "comment": "",
+      "command": "click",
+      "target": "id=nicknameInput",
+      "targets": [
+        ["id=nicknameInput", "id"],
+        ["css=#nicknameInput", "css:finder"],
+        ["xpath=//input[@id='nicknameInput']", "xpath:attributes"],
+        ["xpath=//div[@id='newGamePopupInput']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6a58df53-4fe5-464e-b1c7-c0624c1df20f",
+      "comment": "",
+      "command": "type",
+      "target": "id=nicknameInput",
+      "targets": [
+        ["id=nicknameInput", "id"],
+        ["css=#nicknameInput", "css:finder"],
+        ["xpath=//input[@id='nicknameInput']", "xpath:attributes"],
+        ["xpath=//div[@id='newGamePopupInput']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "asd"
+    }, {
+      "id": "35fb8bdd-39bf-4027-9fd7-9e5c730d789f",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Begin",
+      "targets": [
+        ["linkText=Begin", "linkText"],
+        ["css=#newGamePopupButtonWrapper > .btn", "css:finder"],
+        ["xpath=//a[contains(text(),'Begin')]", "xpath:link"],
+        ["xpath=//a[@onclick='beginGame()']", "xpath:attributes"],
+        ["xpath=//div[@id='newGamePopupButtonWrapper']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'game.html')]", "xpath:href"],
+        ["xpath=//div/div/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Begin')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c8a04a7c-5b75-4256-aeac-b2ffd8cccd58",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(1) > .clickable:nth-child(1)",
+      "targets": [
+        ["css=tr:nth-child(1) > .clickable:nth-child(1)", "css:finder"],
+        ["xpath=//td[@onclick='openShipPopup(\"Axiom\")']", "xpath:attributes"],
+        ["xpath=//div[@id='shipWindow']/table/tbody/tr/td", "xpath:idRelative"],
+        ["xpath=//td", "xpath:position"],
+        ["xpath=//td[contains(.,'Axiom')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "31b9cff3-bea4-4ff5-a5d3-bacd4a3febad",
+      "comment": "",
+      "command": "click",
+      "target": "css=.clickable:nth-child(1) > td:nth-child(2)",
+      "targets": [
+        ["css=.clickable:nth-child(1) > td:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='shipPopupDocked']/div/div[2]/div/table/tbody/tr/td[2]", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div[2]/div/table/tbody/tr/td[2]", "xpath:position"],
+        ["xpath=//td[contains(.,'Dwimeryt')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "eb428a39-9ea2-4250-ac62-173ef0260f3e",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=#gameStateBar > .text-right",
+      "targets": [
+        ["css=#gameStateBar > .text-right", "css:finder"],
+        ["xpath=//div[@id='gameStateBar']/h3[3]", "xpath:idRelative"],
+        ["xpath=//h3[3]", "xpath:position"],
+        ["xpath=//h3[contains(.,'$1974')]", "xpath:innerText"]
+      ],
+      "value": "$1984"
+    }, {
+      "id": "215f8f38-1e13-4cb6-a97f-0d595d6b0c7e",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.highlighted > td:nth-child(1)",
+      "targets": [
+        ["css=.highlighted > td:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='shipPopupDocked']/div/div[2]/div/table/tbody/tr/td", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div[2]/div/table/tbody/tr/td", "xpath:position"],
+        ["xpath=//td[contains(.,'1')]", "xpath:innerText"]
+      ],
+      "value": "0"
+    }, {
+      "id": "d8a18a2d-30bf-4236-86dc-16949bc34751",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.highlighted > td:nth-child(5)",
+      "targets": [
+        ["css=.highlighted > td:nth-child(5)", "css:finder"],
+        ["xpath=//div[@id='shipPopupDocked']/div/div[2]/div/table/tbody/tr/td[5]", "xpath:idRelative"],
+        ["xpath=//td[5]", "xpath:position"],
+        ["xpath=//td[contains(.,'63')]", "xpath:innerText"]
+      ],
+      "value": "64"
+    }, {
+      "id": "4779dada-e9f0-44b0-8be6-efda46efe54f",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=#shipPopupDocked .popup-content-window h3",
+      "targets": [
+        ["css=#shipPopupDocked .popup-content-window h3", "css:finder"],
+        ["xpath=//div[@id='shipPopupDocked']/div/div[2]/div[2]/h3", "xpath:idRelative"],
+        ["xpath=//div[8]/div/div[2]/div[2]/h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'1/27')]", "xpath:innerText"]
+      ],
+      "value": "0/27"
+    }, {
+      "id": "f2c12512-f387-47c0-b200-1e3afd5a2fac",
+      "comment": "",
+      "command": "click",
+      "target": "css=input",
+      "targets": [
+        ["css=input", "css:finder"],
+        ["xpath=//input[@type='number']", "xpath:attributes"],
+        ["xpath=//div[@id='shipPopupDocked']/div/div[2]/div[2]/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7aa51eed-d310-4e10-98bc-13ca60e14fff",
+      "comment": "",
+      "command": "type",
+      "target": "css=input",
+      "targets": [
+        ["css=input", "css:finder"],
+        ["xpath=//input[@type='number']", "xpath:attributes"],
+        ["xpath=//div[@id='shipPopupDocked']/div/div[2]/div[2]/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "8a5cc3f2-7dd7-4580-8a85-bb4335152f5a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//button[@onclick='tradeItem()']", "xpath:attributes"],
+        ["xpath=//div[@id='shipPopupDocked']/div/div[2]/div[2]/div/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Confirm')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e65a899e-f68f-4e78-9c6e-c57d4d62e18c",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=#gameStateBar > .text-right",
+      "targets": [
+        ["css=#gameStateBar > .text-right", "css:finder"],
+        ["xpath=//div[@id='gameStateBar']/h3[3]", "xpath:idRelative"],
+        ["xpath=//h3[3]", "xpath:position"],
+        ["xpath=//h3[contains(.,'$1974')]", "xpath:innerText"]
+      ],
+      "value": "$1974"
+    }, {
+      "id": "0c991b4e-28b8-4a44-9b5e-937541e24114",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.highlighted > td:nth-child(1)",
+      "targets": [
+        ["css=.highlighted > td:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='shipPopupDocked']/div/div[2]/div/table/tbody/tr/td", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div[2]/div/table/tbody/tr/td", "xpath:position"],
+        ["xpath=//td[contains(.,'1')]", "xpath:innerText"]
+      ],
+      "value": "1"
+    }, {
+      "id": "74e23141-5aa6-428f-b708-9d257b09b17f",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.highlighted > td:nth-child(5)",
+      "targets": [
+        ["css=.highlighted > td:nth-child(5)", "css:finder"],
+        ["xpath=//div[@id='shipPopupDocked']/div/div[2]/div/table/tbody/tr/td[5]", "xpath:idRelative"],
+        ["xpath=//td[5]", "xpath:position"],
+        ["xpath=//td[contains(.,'63')]", "xpath:innerText"]
+      ],
+      "value": "63"
+    }, {
+      "id": "f2acebb4-e733-4655-9e49-fad729757872",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=#shipPopupDocked .popup-content-window h3",
+      "targets": [
+        ["css=#shipPopupDocked .popup-content-window h3", "css:finder"],
+        ["xpath=//div[@id='shipPopupDocked']/div/div[2]/div[2]/h3", "xpath:idRelative"],
+        ["xpath=//div[8]/div/div[2]/div[2]/h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'1/27')]", "xpath:innerText"]
+      ],
+      "value": "1/27"
+    }, {
+      "id": "df943aa9-23f5-409b-949d-78d96f87f24c",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "0561ec6e-3a54-4fd9-b9f4-e2e329469f6e",
+    "name": "Ships can move",
+    "commands": [{
+      "id": "b3caf548-72a9-49b7-b45c-72d8c4e8120a",
+      "comment": "",
+      "command": "open",
+      "target": "file:///D:/Desktop/Projekty/2rok/WWW/Galactic_Trader/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "eb5e24a6-994d-41c1-9208-e07f19856b5e",
+      "comment": "",
+      "command": "click",
+      "target": "id=newGameButton",
+      "targets": [
+        ["id=newGameButton", "id"],
+        ["linkText=New game", "linkText"],
+        ["css=#newGameButton", "css:finder"],
+        ["xpath=//a[contains(text(),'New game')]", "xpath:link"],
+        ["xpath=//a[@id='newGameButton']", "xpath:attributes"],
+        ["xpath=//div[@id='newGameBar']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#newGamePopup')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'New game')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "384b7e35-7922-4014-9061-6f21a914f361",
+      "comment": "",
+      "command": "click",
+      "target": "id=nicknameInput",
+      "targets": [
+        ["id=nicknameInput", "id"],
+        ["css=#nicknameInput", "css:finder"],
+        ["xpath=//input[@id='nicknameInput']", "xpath:attributes"],
+        ["xpath=//div[@id='newGamePopupInput']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7e302d28-fe5b-4fdf-afa1-dfe22c46201f",
+      "comment": "",
+      "command": "type",
+      "target": "id=nicknameInput",
+      "targets": [
+        ["id=nicknameInput", "id"],
+        ["css=#nicknameInput", "css:finder"],
+        ["xpath=//input[@id='nicknameInput']", "xpath:attributes"],
+        ["xpath=//div[@id='newGamePopupInput']/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "asd"
+    }, {
+      "id": "693ded1b-be11-4e13-a0ba-5e63f18b11a4",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Begin",
+      "targets": [
+        ["linkText=Begin", "linkText"],
+        ["css=#newGamePopupButtonWrapper > .btn", "css:finder"],
+        ["xpath=//a[contains(text(),'Begin')]", "xpath:link"],
+        ["xpath=//a[@onclick='beginGame()']", "xpath:attributes"],
+        ["xpath=//div[@id='newGamePopupButtonWrapper']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'game.html')]", "xpath:href"],
+        ["xpath=//div/div/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Begin')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5c58e579-4256-4679-a378-03c142bb244c",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(1) > .clickable:nth-child(1)",
+      "targets": [
+        ["css=tr:nth-child(1) > .clickable:nth-child(1)", "css:finder"],
+        ["xpath=//td[@onclick='openShipPopup(\"Axiom\")']", "xpath:attributes"],
+        ["xpath=//div[@id='shipWindow']/table/tbody/tr/td", "xpath:idRelative"],
+        ["xpath=//td", "xpath:position"],
+        ["xpath=//td[contains(.,'Axiom')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "0d810d77-64dd-4a0f-b2e2-bed0b3d40656",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=#shipPopupDocked .text-right",
+      "targets": [
+        ["css=#shipPopupDocked .text-right", "css:finder"],
+        ["xpath=//div[@id='shipPopupDocked']/div/div/div[2]/h3[3]", "xpath:idRelative"],
+        ["xpath=//div[2]/h3[3]", "xpath:position"]
+      ],
+      "value": "Tatooine"
+    }, {
+      "id": "638f6029-e71d-4633-9a64-9744bc82b274",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.planet:nth-child(12) > h3:nth-child(3)",
+      "targets": [
+        ["css=.planet:nth-child(12) > h3:nth-child(3)", "css:finder"],
+        ["xpath=//div[@id='planetWindow']/div[12]/h3[2]", "xpath:idRelative"],
+        ["xpath=//div[12]/h3[2]", "xpath:position"]
+      ],
+      "value": "DOCKED"
+    }, {
+      "id": "946669bc-2365-4456-b9a7-469e556ceda0",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.planet:nth-child(4) > h3:nth-child(3)",
+      "targets": [
+        ["css=.planet:nth-child(4) > h3:nth-child(3)", "css:finder"],
+        ["xpath=//div[@id='planetWindow']/div[4]/h3[2]", "xpath:idRelative"],
+        ["xpath=//div[4]/h3[2]", "xpath:position"],
+        ["xpath=//h3[contains(.,'DOCKED')]", "xpath:innerText"]
+      ],
+      "value": "4"
+    }, {
+      "id": "f0420bda-4199-42a8-ac40-0fc57afadbff",
+      "comment": "",
+      "command": "click",
+      "target": "css=.planet:nth-child(4) > img",
+      "targets": [
+        ["css=.planet:nth-child(4) > img", "css:finder"],
+        ["xpath=(//img[@alt='assets/planet1.jpg'])[2]", "xpath:img"],
+        ["xpath=//div[@id='planetWindow']/div[4]/img", "xpath:idRelative"],
+        ["xpath=//div[4]/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "34161b40-4131-4396-affa-7899e6ca0a5d",
+      "comment": "",
+      "command": "pause",
+      "target": "4100",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "28133be6-9829-4b47-ac8c-5809eec47956",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=#shipPopupDocked .text-right",
+      "targets": [
+        ["css=#shipPopupDocked .text-right", "css:finder"],
+        ["xpath=//div[@id='shipPopupDocked']/div/div/div[2]/h3[3]", "xpath:idRelative"],
+        ["xpath=//div[2]/h3[3]", "xpath:position"]
+      ],
+      "value": "Corellia"
+    }, {
+      "id": "f610ade5-b0d8-4099-b09e-e02c35049063",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.planet:nth-child(12) > h3:nth-child(3)",
+      "targets": [
+        ["css=.planet:nth-child(12) > h3:nth-child(3)", "css:finder"],
+        ["xpath=//div[@id='planetWindow']/div[12]/h3[2]", "xpath:idRelative"],
+        ["xpath=//div[12]/h3[2]", "xpath:position"]
+      ],
+      "value": "4"
+    }, {
+      "id": "6e390f5e-e373-4c03-a27d-732f6e44b0a1",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.planet:nth-child(4) > h3:nth-child(3)",
+      "targets": [
+        ["css=.planet:nth-child(4) > h3:nth-child(3)", "css:finder"],
+        ["xpath=//div[@id='planetWindow']/div[4]/h3[2]", "xpath:idRelative"],
+        ["xpath=//div[4]/h3[2]", "xpath:position"],
+        ["xpath=//h3[contains(.,'DOCKED')]", "xpath:innerText"]
+      ],
+      "value": "DOCKED"
+    }, {
+      "id": "c0ae29f0-1ee3-475c-ab6c-88b123680b1b",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "97bcc6ee-ca84-4769-b4b3-8079155639fd",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["file:///D:/Desktop/Projekty/2rok/WWW/Galactic_Trader/index.html"],
+  "plugins": []
+}

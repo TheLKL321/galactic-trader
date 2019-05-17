@@ -767,7 +767,7 @@ interface Iship {
 }
 
 (<HTMLElement> document.querySelector("#gameStateBar > .text-middle")).innerText = initialData.game_duration;
-startGameCountdown(10);//initialData.game_duration - 1); TODO: restore
+startGameCountdown(initialData.game_duration - 1);
 let money = initialData.initial_credits;
 let moneyText = (<HTMLElement> document.querySelector("#gameStateBar > .text-right"));
 moneyText.textContent = "$" + String(money);
@@ -983,7 +983,7 @@ function moveToPlanet(shipName: string, planetName: string) {
     if (ships[shipName].position === planetName)
         return;
 
-    let distance = 10; //calcDistance(shipName, planetName); TODO: restore
+    let distance = calcDistance(shipName, planetName);
 
     // Remove the ship from planet docklist
     ships[shipName].moving = true;
