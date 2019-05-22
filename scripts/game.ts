@@ -1,5 +1,5 @@
 // noinspection TypeScriptPreferShortImport
-import {fixInput} from './utils.js'
+import {fixInput, calcDistance} from './utils.js'
 
 let nickname = sessionStorage.getItem("nickname");
 (<HTMLElement> document.querySelector("#gameStateBar > .text-left")).textContent = nickname;
@@ -901,7 +901,8 @@ function openShipPopup(shipName: string) {
             planetDiv.addEventListener("click", () => {
                 moveToPlanet(shipName, planetDiv.querySelector("h3").textContent) }, false);
             let distanceTextElement = document.createElement("h3");
-            let distance = calcDistance(shipName, planetDiv.children[1].textContent);
+            let distance = calcDistance(planets[ships[shipName].position].x, planets[ships[shipName].position].y,
+                planets[planetDiv.children[1].textContent].x, planets[planetDiv.children[1].textContent].y);
             distanceTextElement.textContent = distance === 0 ? "DOCKED" : String(distance);
             planetDiv.appendChild(distanceTextElement);
         });
@@ -992,7 +993,8 @@ function moveToPlanet(shipName: string, planetName: string) {
     if (ships[shipName].position === planetName)
         return;
 
-    let distance = calcDistance(shipName, planetName);
+    let distance = calcDistance(planets[ships[shipName].position].x, planets[ships[shipName].position].y,
+        planets[planetName].x, planets[planetName].y);
 
     // Remove the ship from planet docklist
     ships[shipName].moving = true;
@@ -1085,10 +1087,4 @@ function resetInputElement() {
         ships[shipClicked].cargo_hold_size - ships[shipClicked].cargo_load ,onPlanet)));
     inputElement.setAttribute("min", String(-1 * onShip));
     inputElement.value = String(0);
-}
-
-// Returns the distance between a ship and a planet rounded to the nearest integer
-function calcDistance(shipName: string, planetName: string) : number {
-    let dockedAt = ships[shipName].position;
-    return Math.round(Math.sqrt((planets[dockedAt].x - planets[planetName].x) ** 2 + (planets[dockedAt].y - planets[planetName].y) ** 2));
 }
