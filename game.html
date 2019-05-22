@@ -5,6 +5,8 @@
     <link rel="stylesheet" type="text/css" href="styles/styles.css">
     <link rel="stylesheet" type="text/css" href="styles/game-styles.css">
     <title>Galactic Trader</title>
+    <!--<script>var exports = {};</script>-->
+    <!--<script src="scripts/utils.js"></script>-->
 </head>
 <body>
     <div class="container-flex">
@@ -33,7 +35,7 @@
             <div class="wrapper-flex popup-title-bar">
                 <h3 class="popup-title planet-popup">Alderaan</h3>
                 <div id="planetPopupExitButtonWrapper">
-                    <div onclick="closePopup()" class="exit-button clickable planet-popup">X</div>
+                    <div class="exit-button clickable planet-popup">X</div>
                 </div>
             </div>
             <div class="wrapper-flex popup-content-window">
@@ -63,7 +65,7 @@
     <div class="popup-wrapper ship-popup" id="shipPopupDocked">
         <div class="popup ship-popup">
             <div class="wrapper-flex popup-title-bar ship-popup">
-                <div onclick="closePopup()" class="clickable exit-button ship-popup">X</div>
+                <div class="clickable exit-button ship-popup">X</div>
                 <div class="popup-title ship-popup">
                     <h3 class="text-left"></h3>
                     <h3 class="text-middle"><i>DOCKED</i></h3>
@@ -87,10 +89,10 @@
                 <div class="ship-popup popup-control-window">
                     <h3></h3>
                     <label>Amount
-                        <input type="number" disabled>
+                        <input type="number" pattern="\d*" disabled>
                     </label>
                     <div class="button-wrapper ship-popup">
-                        <button onclick="tradeItem()" class="btn ship-popup" disabled>Confirm</button>
+                        <button class="btn ship-popup" disabled>Confirm</button>
                     </div>
                 </div>
             </div>
@@ -101,7 +103,7 @@
         <div class="supplementary-popup-wrapper">
             <div class="popup ship-popup">
                 <div class="wrapper-flex popup-title-bar ship-popup">
-                    <div onclick="closePopup()" class="clickable exit-button ship-popup">X</div>
+                    <div class="clickable exit-button ship-popup">X</div>
                     <div class="popup-title ship-popup">
                         <h3 class="text-left"></h3>
                         <h3 class="text-middle"><i>EN ROUTE</i></h3>
@@ -130,6 +132,6 @@
             </div>
         </div>
     </div>
-    <script src="scripts/game.js"></script>
+    <script type="module" src="scripts/game.js"></script>
 </body>
 </html>

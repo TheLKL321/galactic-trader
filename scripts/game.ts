@@ -1,3 +1,6 @@
+// noinspection TypeScriptPreferShortImport
+import {fixInput} from './utils.js'
+
 let nickname = sessionStorage.getItem("nickname");
 (<HTMLElement> document.querySelector("#gameStateBar > .text-left")).textContent = nickname;
 let initialData = JSON.parse("{\n" +
@@ -783,7 +786,7 @@ for (let planetName in planets) {
     planets[planetName].docked_ships = [];
     for (let itemName of items) {
         if (planets[planetName].available_items[itemName] === undefined)
-            planets[planetName].available_items[itemName] = {available: 0, buy_price: 0, sell_price: 0};
+            planets[planetName].available_items[itemName] = { available: 0, buy_price: 0, sell_price: 0 };
     }
 }
 
@@ -807,12 +810,12 @@ for (let shipName in ships) {
 
     let nameCell = row.insertCell();
     nameCell.textContent = shipName;
-    nameCell.setAttribute("onclick", "openShipPopup(\"" + shipName + "\")");
+    nameCell.addEventListener("click", () => { openShipPopup(shipName); }, false);
     nameCell.setAttribute("class", "clickable");
 
     let positionCell = row.insertCell();
     positionCell.textContent = ships[shipName].position;
-    positionCell.setAttribute("onclick", "openPlanetPopup(\"" + ships[shipName].position + "\")");
+    positionCell.addEventListener("click", () => { openPlanetPopup(ships[shipName].position); }, false);
     positionCell.setAttribute("class", "clickable");
 }
 
@@ -821,7 +824,7 @@ let planetWindowDiv = document.getElementById("planetWindow");
 for (let planetName in planets) {
     let container = document.createElement("div");
     container.setAttribute("class", "planet clickable");
-    container.setAttribute("onclick", "openPlanetPopup(\"" + planetName + "\")");
+    container.addEventListener("click", () => { openPlanetPopup(planetName) }, false);
 
     let image = document.createElement("img");
     let randomInt = Math.floor(Math.random() * 3) + 1;
@@ -835,6 +838,11 @@ for (let planetName in planets) {
     container.appendChild(planetTitle);
     planetWindowDiv.appendChild(container);
 }
+
+// Setup click listeners
+document.querySelectorAll(".clickable.exit-button").forEach(
+    (button) => { button.addEventListener("click", closePopup, false); });
+document.querySelector(".button-wrapper.ship-popup").addEventListener("click", tradeItem, false);
 
 // Starts the main game countdown
 function startGameCountdown(seconds){
@@ -871,7 +879,7 @@ function openShipPopup(shipName: string) {
     for (let itemName of items) {
         let row = goodsTableBody.insertRow();
         if (!ships[shipName].moving) {
-            row.setAttribute("onclick", "selectItem(\"" + itemName + "\")");
+            row.addEventListener ("click", () => { selectItem(itemName); }, false);
             row.setAttribute("class", "clickable");
         }
 
@@ -890,8 +898,8 @@ function openShipPopup(shipName: string) {
     if (!ships[shipName].moving) {
         // Replace planet divs' functionality
         document.querySelectorAll("#planetWindow > div").forEach((planetDiv) => {
-            planetDiv.setAttribute("onclick", "moveToPlanet(\"" + shipName + "\", \""
-                + planetDiv.querySelector("h3").textContent + "\")");
+            planetDiv.addEventListener("click", () => {
+                moveToPlanet(shipName, planetDiv.querySelector("h3").textContent) }, false);
             let distanceTextElement = document.createElement("h3");
             let distance = calcDistance(shipName, planetDiv.children[1].textContent);
             distanceTextElement.textContent = distance === 0 ? "DOCKED" : String(distance);
@@ -924,7 +932,7 @@ function openPlanetPopup(planetName: string) {
     for (let shipName of planets[planetName].docked_ships) {
         let cell = shipsTableBody.insertRow().insertCell();
         cell.textContent = shipName;
-        cell.setAttribute("onclick", "openShipPopup(\"" + shipName + "\")");
+        cell.addEventListener("click", () => {openShipPopup(shipName) }, false);
         cell.setAttribute("class", "clickable");
     }
 
@@ -955,8 +963,9 @@ function tradeItem() {
     let buyPrice = planets[ships[shipClicked].position].available_items[itemClicked].buy_price;
     let onPlanet =  planets[ships[shipClicked].position].available_items[itemClicked].available;
     let onShip = ships[shipClicked].cargo_bay[itemClicked];
-    amount = Math.min(amount, Math.floor(money / buyPrice), ships[shipClicked].cargo_hold_size - ships[shipClicked].cargo_load, onPlanet);
-    amount = Math.max(amount, -1 * onShip);
+    let cargoHoldSize = ships[shipClicked].cargo_hold_size;
+    let cargoLoad = ships[shipClicked].cargo_load;
+    amount = fixInput(amount, buyPrice, onPlanet, onShip, money, cargoHoldSize, cargoLoad);
 
     // Update real values
     planets[ships[shipClicked].position].available_items[itemClicked].available -= amount;
@@ -1040,9 +1049,8 @@ function closePopup() {
     document.querySelector("#shipPopupDocked input").setAttribute("disabled", "disabled");
     document.querySelector("#shipPopupDocked button").setAttribute("disabled", "disabled");
 
-    if (shipClicked !== "" && !ships[shipClicked].moving) {
+    if (shipClicked !== "" && !ships[shipClicked].moving)
         restorePlanetDivs();
-    }
 
     // Reset current selections
     shipClicked = "";
@@ -1063,8 +1071,7 @@ function restorePlanetDivs() {
     document.querySelectorAll("#planetWindow > div").forEach((planetDiv) => {
         if (planetDiv.childElementCount === 3)
             planetDiv.removeChild(planetDiv.lastChild);
-        planetDiv.setAttribute("onclick", "openPlanetPopup(\""
-            + planetDiv.querySelector("h3").textContent + "\")");
+        planetDiv.addEventListener("click", () => { openPlanetPopup(planetDiv.querySelector("h3").textContent) }, false);
     });
 }
 
