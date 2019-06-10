@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "esnext", //commonjs
     "moduleResolution": "node",
     "target": "es5",
     "sourceMap": true

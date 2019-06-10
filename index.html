@@ -13,6 +13,7 @@
         </div>
         <div class="wrapper-flex" id="newGameBar">
             <a href="#newGamePopup" class="btn" id="newGameButton">New game</a>
+            <a href="#newMapPopup" class=btn id="newMapButton">New map</a>
         </div>
         <div class="wrapper-flex">
             <h2>HIGHSCORES</h2>
@@ -35,6 +36,19 @@
                 </label>
                 <div id="newGamePopupButtonWrapper">
                     <a onclick="beginGame()" href="game.html" class="btn new-game-popup">Begin</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="popup-wrapper" id="newMapPopup">
+        <div class="popup new-game-popup">
+            <a href="#" class="exit-button new-game-popup">X</a>
+            <div id="newMapPopupInput">
+                <label>Upload:
+                    <input type="file" accept="application/json">
+                </label>
+                <div id="newMapPopupButtonWrapper">
+                    <a class="btn new-game-popup clickable">Send</a>
                 </div>
             </div>
         </div>
